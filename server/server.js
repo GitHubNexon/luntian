@@ -10,7 +10,7 @@ const setupHelmet = require("./middlewares/helmetMiddleware");
 const app = express();
 
 // Load configuration from environment variables
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 
 // Setup Helmet
 setupHelmet(app);
@@ -32,7 +32,6 @@ app.use(
 // Create an HTTP server
 const server = http.createServer(app);
 
-
 // Routes import
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
@@ -47,9 +46,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 20000,
-  })
+  .connect(process.env.MONGODB_URI, {})
   .then(() => {
     console.log("Connected to MongoDB");
 
@@ -59,6 +56,7 @@ mongoose
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
+    console.error(error.stack);
   });
 
 app.get("/api", (req, res) => {
@@ -70,7 +68,6 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/base", baseRoutes);
 app.use("/api/detect", detectRoutes);
-
 
 // Start the server with Socket.IO
 server.listen(PORT, () => {
