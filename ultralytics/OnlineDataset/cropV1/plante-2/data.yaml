@@ -1,0 +1,16 @@
+names:
+- Bacterial Spot
+- Healthy Leaf
+- Mosaic Virus
+- Septoria
+- Yellow Curl Virus
+nc: 5
+roboflow:
+  license: CC BY 4.0
+  project: plante-ommko
+  url: https://universe.roboflow.com/project-ekn7w/plante-ommko/dataset/2
+  version: 2
+  workspace: project-ekn7w
+test: ../test/images
+train: ../train/images
+val: ../valid/images
