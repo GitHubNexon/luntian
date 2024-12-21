@@ -9,30 +9,45 @@ MONGODB_URI = os.getenv("MONGODB_URI")
 
 # MongoDB client setup
 client = MongoClient(MONGODB_URI)
-db = client.get_database()  
+db = client.get_database()
 collection = db["yolo_v8_detection"]
 
+
 class YoloV8Model:
-    def __init__(self, image=None, date=None, description=None, details=None):
-        
-        if image is None:
-            raise ValueError("Image is a required field.")
+    def __init__(self, images=None, description=None, details=None):
+        if not images:
+            raise ValueError("Images is a required field.")
         if description is None:
             raise ValueError("Description is a required field.")
-        if date is None:
-            raise ValueError("Date is a required field.")
-        
-        self.image = image if image else []
-        self.date = date if date else datetime.now()
+
+        self.images = images if images else []
         self.description = description if description else ""
         self.details = details if details else []
 
     def save(self):
+        timestamp = datetime.now()
+
+        # Wrapping each image as an object with 'data' and 'date'
+        image_objects = []
+        for image in self.images:
+            image_objects.append(
+                {
+                    "data": image.get("data"),  # Image data (binary, URL, etc.)
+                    "date": image.get(
+                        "date", datetime.now()
+                    ),  # Date of the image, default is current date if not provided
+                }
+            )
+
+        # Document to insert into MongoDB
         document = {
-            "image": self.image,
-            "date": self.date,
+            "images": image_objects,  # Array of image objects
             "description": self.description,
             "details": self.details,
+            "created_at": timestamp,
+            "updated_at": timestamp,
+            "--v": 0,
         }
+
         result = collection.insert_one(document)
         return result.inserted_id

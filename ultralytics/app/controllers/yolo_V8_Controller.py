@@ -1,17 +1,66 @@
 from models.yolo_V8_model import YoloV8Model  # Adjust import path if necessary
 from datetime import datetime
+from bson import ObjectId
+from flask import jsonify
+from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+MONGODB_URI = os.getenv("MONGODB_URI")
+
+# MongoDB client setup
+client = MongoClient(MONGODB_URI)
+db = client.get_database()
+collection = db["yolo_v8_detection"]
+
+
+# Utility function to convert all ObjectId fields to strings
+def convert_objectid_to_string(doc):
+    """Recursively converts ObjectId fields to string in the document."""
+    if isinstance(doc, dict):
+        return {k: convert_objectid_to_string(v) for k, v in doc.items()}
+    elif isinstance(doc, list):
+        return [convert_objectid_to_string(item) for item in doc]
+    elif isinstance(doc, ObjectId):
+        return str(doc)
+    return doc
+
 
 class YoloV8Controller:
     @staticmethod
     def create_detection(data):
         try:
-            
+            # Check if 'image' is provided and is a list of dictionaries with 'data' and 'date'
+            if not isinstance(data["images"], list):
+                raise ValueError("The 'image' field must be an array of objects.")
+
+            # Validate each image object has 'data' and 'date' fields
+            images = []
+            for img in data["images"]:
+                if not isinstance(img, dict) or "data" not in img:
+                    raise ValueError("Each image must be an object with 'data' field.")
+
+                # Ensure the 'date' is stored as a datetime object
+                date_value = img.get("date", datetime.now())
+                if isinstance(date_value, str):
+                    # If the date is a string, convert it to a datetime object
+                    date_value = datetime.fromisoformat(
+                        date_value.replace("Z", "+00:00")
+                    )
+
+                images.append(
+                    {
+                        "data": img["data"],  # Image data (binary, URL, etc.)
+                        "date": date_value,
+                    }
+                )
+
             # Create a new YoloV8Model instance
             detection = YoloV8Model(
-                image=data['image'],
-                description=data['description'],
-                details=data.get('details', []),
-                date=data.get('date', datetime.now())
+                images=images,  # Passing the array of images
+                description=data["description"],
+                details=data.get("details", []),
             )
 
             # Save the detection to MongoDB
@@ -19,9 +68,155 @@ class YoloV8Controller:
 
             return {
                 "message": "Detection saved successfully",
-                "status" : "success",
+                "status": "success",
             }
 
         except Exception as e:
             return {"error": str(e)}
 
+    @staticmethod
+    def update_detection_byId(detection_id, data):
+        try:
+            # Ensure the detection_id is valid
+            if not ObjectId.is_valid(detection_id):
+                return ({"status": "error", "message": "Invalid detection_id format"},)
+
+            # Prepare the update data
+            update_data = {}
+
+            # Handle 'image' field as an array of objects with 'data' and 'date'
+            if "images" in data:
+                # Ensure 'image' is a list of objects with 'data' and 'date'
+                if not isinstance(data["images"], list):
+                    return (
+                        {
+                            "status": "error",
+                            "message": "'image' must be an array of objects with 'data' and 'date'",
+                        },
+                    )
+                images = []
+                for img in data["images"]:
+                    if not isinstance(img, dict) or "data" not in img:
+                        return (
+                            {
+                                "status": "error",
+                                "message": "Each image object must contain 'data' field",
+                            },
+                        )
+
+                    # Ensure the 'date' is stored as a datetime object
+                    date_value = img.get("date", datetime.now())
+                    if isinstance(date_value, str):
+                        # If the date is a string, convert it to a datetime object
+                        date_value = datetime.fromisoformat(
+                            date_value.replace("Z", "+00:00")
+                        )
+                    # Append the image object with 'data' and 'date'
+                    images.append(
+                        {
+                            "data": img["data"],
+                            "date": date_value,
+                        }
+                    )
+                update_data["images"] = images
+
+            # Handle other fields ('description', 'details', 'date')
+            if "description" in data:
+                update_data["description"] = data["description"]
+            if "details" in data:
+                update_data["details"] = data["details"]
+            if "updated_at" in data:
+                update_data["updated_at"] = data["updated_at"]
+            else:
+                update_data["updated_at"] = datetime.now()
+            if "--v" in data:
+                update_data["--v"] = 1  # Set the increment value to 1
+
+            # If no fields to update, return an error
+            if not update_data:
+                return ({"status": "error", "message": "No fields to update"},)
+
+            # Update the document in MongoDB
+            result = collection.update_one(
+                {"_id": ObjectId(detection_id)},
+                {"$inc": {"--v": update_data.get("--v", 1)}, "$set": update_data},
+            )
+
+            # Check if the document was found and updated
+            if result.matched_count == 0:
+                return ({"status": "error", "message": "Detection not found"},)
+
+            return {
+                "message": "Detection updated successfully",
+                "status": "success",
+            }
+
+        except Exception as e:
+            return ({"status": "error", "message": str(e)},)
+
+    @staticmethod
+    def get_detection_byId(detection_id):
+        try:
+            # Ensure the detection_id is valid
+            if not ObjectId.is_valid(detection_id):
+                return ({"status": "error", "message": "Invalid detection_id format"},)
+
+            # Find the detection by ID
+            detection = collection.find_one({"_id": ObjectId(detection_id)})
+
+            if not detection:
+                return ({"status": "error", "message": "Detection not found"},)
+
+            # Format the response as needed (excluding _id from the response)
+            detection["_id"] = str(detection["_id"])
+            return {
+                "message": "Detection get successfully",
+                "status": "success",
+                "data": detection,
+            }
+
+        except Exception as e:
+            return ({"status": "error", "message": str(e)},)
+
+    @staticmethod
+    def get_all_detections(
+        page=1, limit=10, keyword="", sortBy="date", sortOrder="asc"
+    ):
+        try:
+            # Prepare the query with the keyword search
+            query = {}
+            if keyword:
+                query = {
+                    "$or": [
+                        {"image": {"$regex": keyword, "$options": "i"}},
+                        {"description": {"$regex": keyword, "$options": "i"}},
+                    ]
+                }
+
+            # Sort criteria and order
+            sort_order = 1 if sortOrder == "asc" else -1
+            sort_criteria = {sortBy: sort_order}
+
+            # Calculate pagination
+            total_items = collection.count_documents(query)
+            data = (
+                collection.find(query)
+                .sort(sort_criteria)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
+            # Convert the results into a list and format _id as string
+            data = [convert_objectid_to_string(detection) for detection in data]
+
+            return {
+                "status": "success",
+                "currentPage": page,
+                "totalItems": total_items,
+                "totalPages": (total_items // limit)
+                + (1 if total_items % limit > 0 else 0),
+                "data": data,
+            }
+
+        except Exception as e:
+            return ({"status": "error", "message": str(e)},)
