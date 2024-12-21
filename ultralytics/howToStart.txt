@@ -1,0 +1,9 @@
+pip install -r requirements.txt
+for manual
+pip install opencv-python
+pip install ultralytics
+pip install mathplotlib
+pip install torch
+pip install droid
+
+pip list
