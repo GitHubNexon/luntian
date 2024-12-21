@@ -7,11 +7,17 @@ import mobile
 
 
 print("Arguments passed to script:", sys.argv)
+# Define the base directory relative to the current script
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Load the trained model
-model_path = r"C:\4th Year\Thesis-Projects\YoloV8\ultralytics\runs\CropV1Trained\cropV1\weights\best.pt"
+# model_path = r"C:\4th Year\Thesis-Projects\YoloV8\ultralytics\runs\CropV1Trained\cropV1\weights\best.pt"
+model_path = os.path.join(base_dir,"runs", "CropV1Trained", "cropV1", "weights", "best.pt")
+
 model = YOLO(model_path)
 
-results_path = r"C:\4th Year\Thesis-Projects\YoloV8\ultralytics\results"
+# results_path = r"C:\4th Year\Thesis-Projects\YoloV8\ultralytics\results"
+results_path = os.path.join(base_dir,"results")
 os.makedirs(results_path, exist_ok=True)
 
 def get_incremental_filename(base_path, base_name, extension):
@@ -290,6 +296,7 @@ if __name__ == "__main__":
 
 # Image detection:
 # python crop_detect.py image path/to/your/image.jpg
+# python crop_detect.py image "C:\\Users\\Admin\\Downloads\\leaf_1.jpg"
 
 # Video detection:
 # python crop_detect.py video path/to/your/video.mp4
