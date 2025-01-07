@@ -1,68 +1,105 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h2 {
+  @apply text-xl md:text-4xl;
+  font-family: 'Poppins', sans-serif;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+p {
+  @apply text-xl tracking-tight leading-relaxed;
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.fade{
+  transition: opacity 1s, visibility 1s !important;
+}
+
+.animated-border{
+  transition: border-color 1s !important;
+}
+
+.red-border{
+  border: 1px solid red;
+}
+
+.loader{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(192, 192, 192, 0.538) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.modal{
+  background-color: rgba(192, 192, 192, 0.538);
+  backdrop-filter: blur(5px);
+}
+
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+  height: 12px; /* Height of the horizontal scrollbar */
+}
+
+/* Style the scrollbar track (the part the thumb slides along) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background color of the track */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Style the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: rgb(61, 149, 61); /* Background color of the thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Style the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(62, 221, 62); /* Darker background color when hovered */
+}
+
+
+
+/* Add transition to the height property for smooth expansion/collapse */
+.animated-list {
+  overflow: hidden; /* Hide content that overflows */
+  transition: height 0.3s ease; /* Adjust duration and timing */
+}
+
+.animated-list-enter {
+  height: 0;
+}
+
+.animated-list-enter-active {
+  height: auto;
+}
+
+.animated-list-exit {
+  height: auto;
+}
+
+.animated-list-exit-active {
+  height: 0;
+}
+.scrollable-table-container {
+  height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+  overflow-x: auto;
 }
