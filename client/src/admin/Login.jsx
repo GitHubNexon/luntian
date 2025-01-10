@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSplash } from "../context/SplashContext";
 import { useLoader } from "../context/useLoader"; // Import the LoaderContext
 import { showToast } from "../utils/toastNotifications"; // Import the toast utility
-import LoginImage from "../assets/Images/landing-img.png";
+import LoginImage from "../assets/Images/landing-img.jpg";
 import "./Login.css";
 
 const Login = () => {
@@ -66,7 +66,7 @@ const Login = () => {
                   Welcome Back
                 </h1>
                 <p className="text-gray-900 text-2xl font-normal mb-6">
-                  Log In to your Scholarly Account
+                  Log In
                 </p>
                 <form className="form w-full" onSubmit={handleSubmit}>
                   <div className="input-field relative mb-4">
@@ -118,14 +118,14 @@ const Login = () => {
                     </label>
                   </div>
 
-                  <div className="flex items-center justify-between mb-6">
+                  {/* <div className="flex items-center justify-between mb-6">
                     <Link
                       to="#"
                       className="text-blue-500 hover:underline text-sm"
                     >
                       Forgot Password?
                     </Link>
-                  </div>
+                  </div> */}
                   <button
                     type="submit"
                     className="bg-black text-white text-sm p-2 rounded-lg mb-4 w-full"
@@ -143,7 +143,7 @@ const Login = () => {
               <img
                 src={LoginImage} // Your image URL
                 alt="Login Illustration"
-                className="object-cover w-full h-full rounded-lg" // Add rounded corners if needed
+                className="object-cover w-[30vw] h-[60vh] rounded-lg" // Add rounded corners if needed
               />
             </div>
           </div>

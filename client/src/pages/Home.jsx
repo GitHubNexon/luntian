@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../admin/Login";
-import LandingBG from "../assets/Images/landing-bg.png";
+import LandingBG from "../assets/Images/image.png";
 import LandingHeader from "../components/LandingHeader";
 
 const Home = () => {
