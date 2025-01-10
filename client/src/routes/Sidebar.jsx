@@ -46,20 +46,12 @@ const Sidebar = () => {
     user.accessTypes.some((type) => type.code === "administrator");
 
   const menuItems = [
-    { path: "/", label: "Home", icon: <AiOutlineHome size={20} /> },
-    { path: "/chat", label: "Chats", icon: <AiOutlineMessage size={20} /> },
+    { path: "/", label: "DashBoard", icon: <AiOutlineHome size={20} /> },
+    // { path: "/chat", label: "Chats", icon: <AiOutlineMessage size={20} /> },
     // { path: "/profile", label: "Profile", icon: <FaCircleUser size={20} /> },
     // { path: user ? `/profile/${user.username}` : "/profile", label: "Profile", icon: <FaCircleUser size={20} /> },
-    { path: `/profile/${user?.username || "guest"}`, label: "Profile", icon: <FaCircleUser size={20} /> },
-
-
-
-    {
-      path: "/broadcast",
-      label: "Broadcast",
-      icon: <AiOutlineBell size={20} />,
-    },
-    { path: "/room", label: "Room", icon: <AiOutlineTeam size={20} /> },
+    // { path: `/profile/${user?.username || "guest"}`, label: "Profile", icon: <FaCircleUser size={20} /> },
+    // { path: "/room", label: "Room", icon: <AiOutlineTeam size={20} /> },
     ...(isAdmin
       ? [
           {
@@ -119,19 +111,6 @@ const Sidebar = () => {
             <span className="ml-4">Logout</span>
           </button>
         </div>
-
-        User Profile Section
-        {/* <div className="absolute bottom-0 left-0 w-full p-4 bg-gray-900">
-          <div className="flex items-center">
-            <AiOutlineUser size={40} />
-            <div className="ml-2">
-              <p className="font-bold">{user?.username || "Guest"}</p>
-              <p className="text-sm text-gray-400">
-                {user?.email || "Not logged in"}
-              </p>
-            </div>
-          </div>
-        </div> */}
       </div>
 
       {/* Overlay */}
