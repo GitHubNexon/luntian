@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-[#28A2D8] text-white p-2 flex justify-between items-center">
+    <div className="bg-[#38572ACC] text-white p-2 flex justify-between items-center">
       <div>
         <button className="text-[1.7em]" onClick={toggleSidebar}>
           <MdOutlineMenuBook
@@ -35,36 +35,8 @@ const Header = () => {
         </button>
       </div>
       <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold">Scholarly</h1>
-        <p className="text-sm mt-1">Asian Institute of Computer Studies</p>
-      </div>
-      <div>
-        <button
-          onClick={toggleProfileHover}
-          className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center border border-white"
-        >
-          {profileImage ? (
-            <img
-              id="profileImage"
-              src={`data:image/jpeg;base64,${profileImage}`}
-              alt="Profile"
-              className="w-full h-full object-cover rounded-full"
-            />
-          ) : (
-            <img
-              src={defaultImg} // Use the default image if profileImage is not available
-              alt="Default Profile"
-              className="w-full h-full object-cover rounded-full"
-            />
-          )}
-        </button>
-        {/* Only render ProfileHover if isProfileHoverVisible is true */}
-        {isProfileHoverVisible && (
-          <ProfileHover
-            isVisible={isProfileHoverVisible}
-            onClose={closeProfileHover}
-          />
-        )}
+        <h1 className="text-2xl font-bold">Luntian</h1>
+        <p className="text-sm mt-1">Plant Make Life Better</p>
       </div>
     </div>
   );

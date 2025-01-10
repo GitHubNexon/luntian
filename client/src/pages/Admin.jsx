@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { FaEdit, FaTrash, FaPlus, FaFileExcel, FaUnlock } from "react-icons/fa";
+import UserModal from "../Modal/UserModal";
 import { showToast } from "../utils/toastNotifications";
-import * as XLSX from "xlsx"; 
+import * as XLSX from "xlsx";
 import useAdminTable from "../context/useAdminTable"; // Adjust the import path if needed
-import axios from "axios"; 
+import FileNameModal from "../Modal/FileNameModal"; // Ensure this path is correct
+import axios from "axios";
 import Sidebar from "../routes/Sidebar";
+import { formatReadableDate } from "../helper/helper";
 
 const Admin = () => {
   const [page, setPage] = useState(1);
@@ -158,18 +161,13 @@ const Admin = () => {
     { name: "Email", selector: (row) => row.email, sortable: true },
     { name: "User Type", selector: (row) => row.userType, sortable: true },
     {
-      name: "School Number",
-      selector: (row) => row.schoolNumber || "N/A",
-      sortable: true,
-    },
-    {
       name: "Date Created",
-      selector: (row) => new Date(row.dateTimestamp).toLocaleString(),
+      selector: (row) => formatReadableDate(row.dateTimestamp),
       sortable: true,
     },
     {
       name: "Date Updated",
-      selector: (row) => new Date(row.dateUpdated).toLocaleString(),
+      selector: (row) => formatReadableDate(row.dateUpdated),
       sortable: true,
     },
     {
