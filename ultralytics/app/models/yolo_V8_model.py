@@ -40,21 +40,25 @@ class YoloV8Model:
             if isinstance(date_value, str):
                 date_value = datetime.fromisoformat(date_value)
                 date_value = date_value.astimezone(philippines_tz)
+            
+            # Ensure date_value is always timezone-aware
+            elif date_value.tzinfo is None:
+                date_value = philippines_tz.localize(date_value)
 
             image_objects.append(
                 {
-                    "data": image.get("data"),  # Image data (binary, URL, etc.)
+                    "data": image.get("data"), 
                     "date": date_value,
                 }
             )
 
         # Document to insert into MongoDB
         document = {
-            "images": image_objects,  # Array of image objects
+            "images": image_objects,  
             "description": self.description,
             "details": self.details,
-            "created_at": date_value,
-            "updated_at": date_value,
+            "created_at": timestamp,
+            "updated_at": timestamp,
             "image_result": self.image_result,
             "--v": 0,
         }

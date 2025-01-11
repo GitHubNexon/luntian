@@ -189,7 +189,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 <button
                   type="button"
                   onClick={handleAddDescription}
-                  className="bg-blue-500 text-white py-1 px-3 rounded-md mt-2 hover:bg-blue-600"
+                  className="bg-[#38572ACC] text-white py-1 px-3 rounded-md mt-2 hover:bg-[#213318cc]"
                 >
                   Add Description
                 </button>
@@ -233,15 +233,12 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                         onClick={openImageModal}
                       >
                         <img
-                          src={`data:image/jpeg;base64,${image.data}`} // Assuming the base64 data represents a JPEG
+                          src={`data:image/jpeg;base64,${image.data}`} 
                           alt={`Uploaded ${index}`}
                           className="w-20 h-20 object-cover rounded-md"
                         />
                         <p className="text-xs text-gray-500 mt-5">
                           Uploaded on: {formatReadableDate(image.date)}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-5">
-                          {format(new Date(image.date))}
                         </p>
                       </div>
                     ))}
@@ -253,7 +250,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                className="bg-[#38572ACC] text-white py-2 px-4 rounded-md hover:bg-[#213318cc]"
               >
                 {mode === "edit" ? "Save Changes" : "Save"}
               </button>

@@ -52,8 +52,8 @@ class YoloV8Controller:
             # Decode date
             date_value = img.get("date", datetime.now(philippines_tz))
             if isinstance(date_value, str):
-                date_value = datetime.fromisoformat(date_value)
-                date_value = date_value.astimezone(date_value)
+                    date_value = datetime.fromisoformat(date_value)
+            date_value = date_value.astimezone(philippines_tz)
             print(date_value)
 
             # Perform detection

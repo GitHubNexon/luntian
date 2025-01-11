@@ -10,6 +10,9 @@ import {
   FaFile,
   FaSync,
   FaChartBar,
+  FaBacterium,
+  FaVirus,
+  FaDisease,
 } from "react-icons/fa";
 import { showToast } from "../utils/toastNotifications";
 import showDialog from "../utils/showDialog";
@@ -23,9 +26,47 @@ import DetectionModal from "../Modal/DetectionModal";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { format } from "timeago.js";
 
+const DiseaseIcon = ({ disease, className }) => {
+  const iconClasses = `${className} transition`;
+
+  // Color mapping for each disease type
+  const diseaseColorMap = {
+    "Bacterial Spot": "text-red-600", // Red for Bacterial Spot
+    "Mosaic Virus": "text-blue-600", // Blue for Mosaic Virus
+    Septoria: "text-green-600", // Green for Septoria
+    "Yellow Curl Virus": "text-yellow-600", // Yellow for Yellow Curl Virus
+  };
+
+  // Disease to icon mapping
+  const diseaseIconMap = {
+    "Bacterial Spot": (
+      <FaBacterium
+        className={`${iconClasses} ${diseaseColorMap["Bacterial Spot"]}`}
+      />
+    ),
+    "Mosaic Virus": (
+      <FaVirus
+        className={`${iconClasses} ${diseaseColorMap["Mosaic Virus"]}`}
+      />
+    ),
+    "Septoria": (
+      <FaDisease className={`${iconClasses} ${diseaseColorMap["Septoria"]}`} />
+    ),
+    "Yellow Curl Virus": (
+      <FaVirus
+        className={`${iconClasses} ${diseaseColorMap["Yellow Curl Virus"]}`}
+      />
+    ),
+    // Add more mappings here if needed
+  };
+
+  return diseaseIconMap[disease] || null; // Return the icon if it exists, otherwise null
+};
+
 const ExpandedRowComponent = ({ data }) => {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [filteredDiseaseLogs, setFilteredDiseaseLogs] = useState([]);
 
   const renderData = (value) => {
     if (typeof value === "string") {
@@ -62,6 +103,20 @@ const ExpandedRowComponent = ({ data }) => {
     setSelectedImage(null);
   };
 
+  useEffect(() => {
+    if (data && data.image_result) {
+      const imageResultDiseases = data.image_result || [];
+
+      const updatedFilteredLogs = imageResultDiseases.map((result) => {
+        return {
+          count: result.count,
+          info: result.info,
+        };
+      });
+
+      setFilteredDiseaseLogs(updatedFilteredLogs);
+    }
+  }, [data]);
   return (
     <div className="flex space-x-4 m-10">
       {/* Displaying images */}
@@ -71,7 +126,7 @@ const ExpandedRowComponent = ({ data }) => {
 
       {/* Details Section */}
       <div className="flex-1 space-y-4">
-        {setIsImageModalOpen && selectedImage && (
+        {isImageModalOpen && selectedImage && (
           <div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             onClick={closeModal}
@@ -86,12 +141,6 @@ const ExpandedRowComponent = ({ data }) => {
                 className="object-contain w-full h-full"
                 style={{ maxWidth: "100vw", maxHeight: "100vh" }}
               />
-              {/* <button
-                onClick={closeModal}
-                className="absolute top-2 right-2 text-black"
-              >
-                <AiOutlineCloseCircle size={24} />
-              </button> */}
             </div>
           </div>
         )}
@@ -116,6 +165,25 @@ const ExpandedRowComponent = ({ data }) => {
               <li key={index}>{renderData(desc)}</li>
             ))}
           </ul>
+        </div>
+
+        {/* Disease Detection Logs */}
+        <div>
+          <span className="font-bold text-lg">Plant Disease Detection:</span>
+          <div className="space-y-2">
+            {filteredDiseaseLogs.map((log, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <DiseaseIcon
+                  disease={log.info}
+                  //   className="text-green-600 hover:text-green-800"
+                />
+                <span className="text-gray-700">{log.info}</span>
+                <span className="text-sm text-gray-500">
+                  ({log.count} occurrence{log.count > 1 ? "s" : ""})
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -232,10 +300,10 @@ const BudgetTable = () => {
       cell: (row) => (
         <span
           className="table-cell text-[0.8em] break-words"
-          data-full-text={
-            formatReadableDate(row.created_at) -
-            format(new Date(row.created_at))
-          }
+          //   data-full-text={
+          //     formatReadableDate(row.created_at) -
+          //     format(new Date(row.created_at))
+          //   }
         >
           <div className="flex flex-col">
             <span>{formatReadableDate(row.created_at)}</span>
@@ -250,10 +318,10 @@ const BudgetTable = () => {
       cell: (row) => (
         <span
           className="table-cell text-[0.8em] break-words"
-          data-full-text={
-            formatReadableDate(row.updated_at) -
-            format(new Date(row.updated_at))
-          }
+          //   data-full-text={
+          //     formatReadableDate(row.updated_at) -
+          //     format(new Date(row.updated_at))
+          //   }
         >
           <div className="flex flex-col">
             <span>{formatReadableDate(row.updated_at)}</span>
@@ -317,7 +385,7 @@ const BudgetTable = () => {
             /> */}
             <button
               onClick={handleFetchLatest}
-              className="bg-blue-600 text-white rounded-md px-6 py-2 text-sm hover:scale-105 transition transform duration-300 flex items-center"
+              className="bg-[#38572ACC] text-white rounded-md px-6 py-2 text-sm hover:scale-105 transition transform duration-300 flex items-center"
             >
               <FaSync size={16} className="mr-2" />
               Fetch latest Data
@@ -330,7 +398,7 @@ const BudgetTable = () => {
             />
             <button
               onClick={handleModalOpen}
-              className="bg-blue-600 text-white rounded-md px-6 py-2 text-sm hover:scale-105 transition transform duration-300 flex items-center"
+              className="bg-[#38572ACC] text-white rounded-md px-6 py-2 text-sm hover:scale-105 transition transform duration-300 flex items-center"
             >
               <FaPlus size={16} className="mr-2" />
               Detect Plant
