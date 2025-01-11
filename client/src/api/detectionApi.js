@@ -38,37 +38,33 @@ const detectionApi = {
     page = 1,
     limit = 10,
     keyword = "",
-    sortBy = "",
-    sortOrder = "asc"
+    sortBy = "created_at",
+    sortOrder = "desc"
   ) => {
     try {
-      if (!keyword) keyword = null; 
-      if (!sortBy) sortBy = "defaultField"; 
+      if (!keyword) keyword = null;
+      if (!sortBy) sortBy = "created_at";
 
       const url = `${API_BASE_URL}/yolo_v8/get_all_detections`;
 
       console.log("Making request to:", url);
       console.log("Params:", { page, limit, keyword, sortBy, sortOrder });
 
-      // Perform the GET request
       const response = await axios.get(url, {
         params: { page, limit, keyword, sortBy, sortOrder },
       });
 
-      // Return the response data
       return response.data;
     } catch (error) {
-      // Log the error and throw it
       console.error("Error fetching detections:", error);
-      throw error; // Rethrow or handle further if needed
     }
   },
 
-  updateDetectionById: async (id, updatedData) => {
+  updateDetectionById: async (id, data) => {
     try {
       const response = await axios.patch(
         `${API_BASE_URL}/yolo_v8/update_detection/${id}`,
-        updatedData
+        data
       );
       return response.data;
     } catch (error) {

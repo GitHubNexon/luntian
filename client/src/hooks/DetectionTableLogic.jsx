@@ -9,7 +9,7 @@ const DetectionTableLogic = (initialPage = 1, initialLimit = 10) => {
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOrder, setSortOrder] = useState("");
   //   const [date, setDate] = useState("");
 
   const fetchDetectionData = async () => {
@@ -19,8 +19,8 @@ const DetectionTableLogic = (initialPage = 1, initialLimit = 10) => {
         initialPage,
         initialLimit,
         searchQuery,
-        sortBy,
-        sortOrder
+        sortBy || "created_at" ,// Defaulting here if necessary
+        sortOrder || "desc" // Defaulting here if necessary
         // date
       );
       setData(response.data);

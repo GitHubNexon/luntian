@@ -19,6 +19,7 @@ import DetectionTableLogic from "../hooks/DetectionTableLogic";
 import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 // import ExpandableBudgetTable from "../Components/ExpandableBudgetTable";
 // import BudgetTrackModal from "../Pop-Up-Pages/BudgetTrackModal";
+import DetectionModal from "../Modal/DetectionModal";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const ExpandedRowComponent = ({ data }) => {
@@ -230,9 +231,9 @@ const BudgetTable = () => {
       id: "created_at",
       selector: (row) => formatReadableDate(row.created_at),
       sortable: true,
-      //   sortFunction: sortByDate("startDate"),
-      //   sortDirection: sortOrder,
-      //   onClick: () => toggleSortOrder("startDate"),
+      // sortFunction: sortByDate("created_at"),
+      // sortDirection: sortOrder,
+      // onClick: () => toggleSortOrder("created_at"),
     },
     {
       name: "Updated At",
@@ -282,7 +283,7 @@ const BudgetTable = () => {
   ];
 
   function refreshTable() {
-    fetchBudgets();
+    fetchDetectionData();
   }
 
   return (
@@ -334,23 +335,18 @@ const BudgetTable = () => {
           expandableRows
           expandableRowsComponent={ExpandedRowComponent}
           expandableRowExpanded={(row) => expandedRows.includes(row._id)}
-          // selectableRows
-          //   sortServer={true}
-          //   sortColumn={sortBy}
-          //   sortDirection={sortOrder}
-          //   onSort={(column) => toggleSortOrder(column.id)}
         />
 
-        {/* {isBudgetModalOpen && (
-          <BudgetTrackModal
+        {isDetectionModalOpen && (
+          <DetectionModal
             mode={modalMode}
-            isOpen={isBudgetModalOpen}
+            isOpen={isDetectionModalOpen}
             onClose={handleModalClose}
-            onSaveBudget={fetchBudgets}
-            budgetData={selectedBudget}
+            onSaveData={fetchDetectionData}
+            data={selectedDetection}
             refreshTable={refreshTable}
           />
-        )} */}
+        )}
       </div>
     </>
   );
