@@ -6,7 +6,9 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from services.detection_services import detect_from_image
+import pytz
 
+philippines_tz = pytz.timezone("Asia/Manila")
 
 
 load_dotenv()
@@ -17,8 +19,7 @@ client = MongoClient(MONGODB_URI)
 db = client.get_database()
 collection = db["yolo_v8_detection"]
 
-#base64 encoder
-
+# base64 encoder
 
 
 # Utility function to convert all ObjectId fields to strings
@@ -35,74 +36,36 @@ def convert_objectid_to_string(doc):
 
 class YoloV8Controller:
     @staticmethod
-    # def create_detection(data):
-    #     try:
-    #         # Check if 'image' is provided and is a list of dictionaries with 'data' and 'date'
-    #         if not isinstance(data["images"], list):
-    #             raise ValueError("The 'image' field must be an array of objects.")
-
-    #         # Validate each image object has 'data' and 'date' fields
-    #         images = []
-    #         for img in data["images"]:
-    #             if not isinstance(img, dict) or "data" not in img:
-    #                 raise ValueError("Each image must be an object with 'data' field.")
-
-    #             # Ensure the 'date' is stored as a datetime object
-    #             date_value = img.get("date", datetime.now())
-    #             if isinstance(date_value, str):
-    #                 # If the date is a string, convert it to a datetime object
-    #                 date_value = datetime.fromisoformat(
-    #                     date_value.replace("Z", "+00:00")
-    #                 )
-
-    #             images.append(
-    #                 {
-    #                     "data": img["data"],  # Image data (binary, URL, etc.)
-    #                     "date": date_value,
-    #                 }
-    #             )
-
-    #         # Create a new YoloV8Model instance
-    #         detection = YoloV8Model(
-    #             images=images,  # Passing the array of images
-    #             description=data["description"],
-    #             details=data.get("details", []),
-    #         )
-
-    #         # Save the detection to MongoDB
-    #         detection.save()
-
-    #         return {
-    #             "message": "Detection saved successfully",
-    #             "status": "success",
-    #         }
-
-    #     except Exception as e:
-    #         return {"error": str(e)}
-    @staticmethod
     def create_detection(data):
         try:
-        # Check if 'images' is provided and is a list of dictionaries with 'data' and 'date'
+            # Check if 'images' is provided and is a list of dictionaries with 'data' and 'date'
             if not isinstance(data["images"], list):
                 raise ValueError("The 'images' field must be an array of objects.")
 
             images = []
             for img in data["images"]:
                 if not isinstance(img, dict) or "data" not in img:
-                    raise ValueError("Each image must be an object with a 'data' field.")
+                    raise ValueError(
+                        "Each image must be an object with a 'data' field."
+                    )
 
             # Decode date
-            date_value = img.get("date", datetime.now())
+            date_value = img.get("date", datetime.now(philippines_tz))
             if isinstance(date_value, str):
-                date_value = datetime.fromisoformat(date_value.replace("Z", "+00:00"))
+                    date_value = datetime.fromisoformat(date_value)
+            date_value = date_value.astimezone(philippines_tz)
+            print(date_value)
 
             # Perform detection
             base64_data = img["data"]
-            detection_results = detect_from_image(base64_data, is_base64=True)
+            # detection_results = detect_from_image(base64_data, is_base64=True)
+            detection_results, detected_classes = detect_from_image(
+                base64_data, is_base64=True
+            )
 
             images.append(
                 {
-                    "data": detection_results,  
+                    "data": detection_results,
                     "date": date_value,
                 }
             )
@@ -112,6 +75,7 @@ class YoloV8Controller:
                 images=images,
                 description=data["description"],
                 details=data.get("details", []),
+                image_result=detected_classes,
             )
 
             # Save the detection to MongoDB
@@ -124,10 +88,6 @@ class YoloV8Controller:
 
         except Exception as e:
             return {"error": str(e)}
-
-    
-   
-
 
     @staticmethod
     def update_detection_byId(detection_id, data):
@@ -164,7 +124,7 @@ class YoloV8Controller:
                     if isinstance(date_value, str):
                         # If the date is a string, convert it to a datetime object
                         date_value = datetime.fromisoformat(
-                            date_value.replace("Z", "+00:00")
+                            date_value.replace("Z", "+16:00:00")
                         )
                     # Append the image object with 'data' and 'date'
                     images.append(
@@ -183,7 +143,7 @@ class YoloV8Controller:
             if "updated_at" in data:
                 update_data["updated_at"] = data["updated_at"]
             else:
-                update_data["updated_at"] = datetime.now()
+                update_data["updated_at"] = datetime.now(philippines_tz)
             if "--v" in data:
                 update_data["--v"] = 1  # Set the increment value to 1
 
