@@ -1,6 +1,18 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaHome, FaUsers } from "react-icons/fa"; // Import the icons
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import {
+  AiOutlineClose,
+  AiOutlineHome,
+  AiOutlineMessage,
+  AiOutlineBell,
+  AiOutlineTeam,
+  AiOutlineSetting,
+  AiOutlineUser,
+  AiOutlineLogout,
+} from "react-icons/ai";
+import { RiAdminFill } from "react-icons/ri";
 
 const ReportNavigation = () => {
   const navigate = useNavigate();
@@ -21,6 +33,18 @@ const ReportNavigation = () => {
             Dashboard
           </button>
         </li>
+        <li
+          className={`py-1 px-4 border-b-[5px] whitespace-nowrap transition-all duration-300 ${
+            location.pathname === "/Detection"
+              ? "border-green-500"
+              : "border-transparent"
+          } hover:border-green-400 hover:text-green-500`}
+        >
+          <button onClick={() => navigate("/Detection")}>
+            <FaMagnifyingGlass className="inline mr-2" /> 
+            Detection
+          </button>
+        </li>
 
         <li
           className={`py-1 px-4 border-b-[5px] whitespace-nowrap transition-all duration-300 ${
@@ -30,7 +54,7 @@ const ReportNavigation = () => {
           } hover:border-green-400 hover:text-green-500`}
         >
           <button onClick={() => navigate("/admin")}>
-            <FaUsers className="inline mr-2" /> {/* Icon added here */}
+            <RiAdminFill className="inline mr-2" /> 
             Admin
           </button>
         </li>

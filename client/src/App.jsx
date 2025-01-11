@@ -13,6 +13,7 @@ import ProtectedRoute from "./routes/ProtectedRoute"; // Make sure you import th
 import PrivateRoute from "./routes/PrivateRoute";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
+import Detection from "./pages/Detection";
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,14 @@ function App() {
                 element={
                   <Layout>
                     <Dashboard />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/Detection"
+                element={
+                  <Layout>
+                    <Detection />
                   </Layout>
                 }
               />

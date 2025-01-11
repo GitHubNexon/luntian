@@ -6,3 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "/luntian/",
 });
+
+
+//$ npm run dev -- --host

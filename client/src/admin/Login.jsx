@@ -143,7 +143,7 @@ const Login = () => {
               <img
                 src={LoginImage} // Your image URL
                 alt="Login Illustration"
-                className="object-cover w-[30vw] h-[60vh] rounded-lg" // Add rounded corners if needed
+                className="object-cover w-[30vw] h-[60vh] rounded-lg max-sm:w-[60vw] max-sm:h-[40vh]" 
               />
             </div>
           </div>

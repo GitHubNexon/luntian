@@ -9,7 +9,8 @@ import {
   AiOutlineUser,
   AiOutlineLogout,
 } from "react-icons/ai";
-import { FaCircleUser } from "react-icons/fa6";
+import { RiAdminFill } from "react-icons/ri";
+import { FaCircleUser, FaMagnifyingGlass } from "react-icons/fa6";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { MiscContext } from "../context/MiscContext"; // Import MiscContext
@@ -47,7 +48,11 @@ const Sidebar = () => {
 
   const menuItems = [
     { path: "/", label: "DashBoard", icon: <AiOutlineHome size={20} /> },
-    // { path: "/chat", label: "Chats", icon: <AiOutlineMessage size={20} /> },
+    {
+      path: "/Detection",
+      label: "Detection",
+      icon: <FaMagnifyingGlass size={20} />,
+    },
     // { path: "/profile", label: "Profile", icon: <FaCircleUser size={20} /> },
     // { path: user ? `/profile/${user.username}` : "/profile", label: "Profile", icon: <FaCircleUser size={20} /> },
     // { path: `/profile/${user?.username || "guest"}`, label: "Profile", icon: <FaCircleUser size={20} /> },
@@ -57,7 +62,7 @@ const Sidebar = () => {
           {
             path: "/admin",
             label: "Admin",
-            icon: <AiOutlineSetting size={20} />,
+            icon: <RiAdminFill size={20} />,
           },
         ]
       : []),
@@ -67,7 +72,7 @@ const Sidebar = () => {
     <div className="flex">
       {/* Sidebar Section */}
       <div
-        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 text-white z-50 transition-transform transform ${
+        className={`fixed top-0 left-0 w-64 h-full bg-[#38572A] text-white z-50 transition-transform transform ${
           expandSidebar ? "translate-x-0" : "-translate-x-full"
         } shadow-lg`}
       >
