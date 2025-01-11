@@ -21,6 +21,7 @@ import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 // import BudgetTrackModal from "../Pop-Up-Pages/BudgetTrackModal";
 import DetectionModal from "../Modal/DetectionModal";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { format } from "timeago.js";
 
 const ExpandedRowComponent = ({ data }) => {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
@@ -228,26 +229,40 @@ const BudgetTable = () => {
     },
     {
       name: "Created At",
-      id: "created_at",
-      selector: (row) => formatReadableDate(row.created_at),
-      sortable: true,
-      // sortFunction: sortByDate("created_at"),
-      // sortDirection: sortOrder,
-      // onClick: () => toggleSortOrder("created_at"),
+      cell: (row) => (
+        <span
+          className="table-cell text-[0.8em] break-words"
+          data-full-text={
+            formatReadableDate(row.created_at) -
+            format(new Date(row.created_at))
+          }
+        >
+          <div className="flex flex-col">
+            <span>{formatReadableDate(row.created_at)}</span>
+            <span>{format(new Date(row.created_at))}</span>
+          </div>
+        </span>
+      ),
+      width: "300px",
     },
     {
-      name: "Updated At",
-      id: "updated_at",
-      selector: (row) => formatReadableDate(row.updated_at),
-      sortable: true,
-      //   sortFunction: sortByDate("endDate"),
-      //   sortDirection: sortOrder,
-      //   onClick: () => toggleSortOrder("endDate"),
+      name: "Updated at",
+      cell: (row) => (
+        <span
+          className="table-cell text-[0.8em] break-words"
+          data-full-text={
+            formatReadableDate(row.updated_at) -
+            format(new Date(row.updated_at))
+          }
+        >
+          <div className="flex flex-col">
+            <span>{formatReadableDate(row.updated_at)}</span>
+            <span>{format(new Date(row.updated_at))}</span>
+          </div>
+        </span>
+      ),
+      width: "300px",
     },
-    // {
-    //   name: "Total Expense",
-    //   selector: (row) => numberToCurrencyString(row.TotalExpense || 0),
-    // },
     {
       name: "Actions",
       cell: (row) => (

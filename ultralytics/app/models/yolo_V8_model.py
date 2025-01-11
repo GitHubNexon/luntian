@@ -15,6 +15,7 @@ collection = db["yolo_v8_detection"]
 
 philippines_tz = pytz.timezone("Asia/Manila")
 
+
 class YoloV8Model:
     def __init__(self, images=None, description=None, details=None):
         if not images:
@@ -32,12 +33,17 @@ class YoloV8Model:
         # Wrapping each image as an object with 'data' and 'date'
         image_objects = []
         for image in self.images:
+            date_value = image.get("date", datetime.now(philippines_tz))
+
+            # If date_value is a string, convert to datetime and adjust timezone
+            if isinstance(date_value, str):
+                date_value = datetime.fromisoformat(date_value)
+                date_value = date_value.astimezone(philippines_tz)
+
             image_objects.append(
                 {
                     "data": image.get("data"),  # Image data (binary, URL, etc.)
-                    "date": image.get(
-                        "date", datetime.now(philippines_tz)
-                    ),  
+                    "date": date_value,
                 }
             )
 
@@ -46,8 +52,8 @@ class YoloV8Model:
             "images": image_objects,  # Array of image objects
             "description": self.description,
             "details": self.details,
-            "created_at": timestamp,
-            "updated_at": timestamp,
+            "created_at": date_value,
+            "updated_at": date_value,
             "--v": 0,
         }
 
