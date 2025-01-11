@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import DetectionTable from "../components/DetectionTable";
 
 const Detection = () => {
   return (
-    <div>Detection</div>
-  )
-}
+    <div>
+      <DetectionTable />
+    </div>
+  );
+};
 
-export default Detection
+export default Detection;
