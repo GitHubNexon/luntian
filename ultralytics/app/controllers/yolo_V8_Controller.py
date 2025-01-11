@@ -58,7 +58,10 @@ class YoloV8Controller:
 
             # Perform detection
             base64_data = img["data"]
-            detection_results = detect_from_image(base64_data, is_base64=True)
+            # detection_results = detect_from_image(base64_data, is_base64=True)
+            detection_results, detected_classes = detect_from_image(
+                base64_data, is_base64=True
+            )
 
             images.append(
                 {
@@ -72,6 +75,7 @@ class YoloV8Controller:
                 images=images,
                 description=data["description"],
                 details=data.get("details", []),
+                image_result=detected_classes,
             )
 
             # Save the detection to MongoDB

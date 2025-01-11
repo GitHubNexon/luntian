@@ -17,7 +17,7 @@ philippines_tz = pytz.timezone("Asia/Manila")
 
 
 class YoloV8Model:
-    def __init__(self, images=None, description=None, details=None):
+    def __init__(self, images=None, description=None, details=None, image_result=None):
         if not images:
             raise ValueError("Images is a required field.")
         if description is None:
@@ -26,6 +26,7 @@ class YoloV8Model:
         self.images = images if images else []
         self.description = description if description else ""
         self.details = details if details else []
+        self.image_result = image_result if image_result else [{"info": "", "count": 0}]
 
     def save(self):
         timestamp = datetime.now(philippines_tz)
@@ -54,6 +55,7 @@ class YoloV8Model:
             "details": self.details,
             "created_at": date_value,
             "updated_at": date_value,
+            "image_result": self.image_result,
             "--v": 0,
         }
 

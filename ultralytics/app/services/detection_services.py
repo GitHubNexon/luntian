@@ -52,7 +52,30 @@ def detect_from_image(image_data, is_base64=False):
             result = results[0]
         else:
             result = results
+            
+        # Initialize an empty dictionary to track detected classes and their counts
+        class_count = {}
 
+        # Access detection boxes and class names
+        for box in result.boxes.data:  # Each box contains the detected object info
+            class_id = int(box[5])  # Class index
+            class_name = result.names[class_id]  # Get class name by index
+            if class_name in class_count:
+                class_count[class_name] += 1  # Increment count for class
+            else:
+                class_count[class_name] = 1  # Initialize count for new class
+
+        # Format the detected classes as objects with 'info' and 'count'
+        detected_classes = [
+            {'info': class_name, 'count': count}
+            for class_name, count in class_count.items()
+        ]
+
+        # Handle case where no detections are found (detected_classes will be empty)
+        if not detected_classes:
+            detected_classes = []
+        
+        
         # Annotate the image (if needed)
         annotated_image = result.plot() if hasattr(result, "plot") else image
 
@@ -72,7 +95,8 @@ def detect_from_image(image_data, is_base64=False):
         # cv2.destroyAllWindows()
 
         print(f"Detection results: {results}")
-        return base64_result 
+        print(f"Detection results info: {detected_classes}")
+        return base64_result, detected_classes 
 
     except Exception as e:
         print(f"Error during detection: {e}")
