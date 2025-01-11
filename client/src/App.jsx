@@ -23,7 +23,7 @@ function App() {
     <>
       <PrivateRoute
         element={
-          <Router>
+          <Router basename="/luntian/">
             <Routes>
               <Route
                 path="/"

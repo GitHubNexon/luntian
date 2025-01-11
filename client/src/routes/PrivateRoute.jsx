@@ -14,7 +14,7 @@ const PrivateRoute = ({ element }) => {
   return user ? (
     element // Render the passed element if the user is authenticated
   ) : (
-    <Router>
+    <Router basename="/luntian/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
