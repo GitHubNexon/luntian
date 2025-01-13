@@ -1,0 +1,236 @@
+[
+  {
+    "plantDetails": {
+      "commonName": "Rice",
+      "scientificName": "Oryza sativa",
+      "family": "Poaceae",
+      "genus": "Oryza",
+      "species": "sativa",
+      "variety": "IR64, NSIC Rc160",
+      "age": 105,
+      "growthStage": "Germination",
+      "datePlanted": null,
+      "temp": 27.5,
+      "humidity": 80,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Rice Blast",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Bacterial Blight",
+        "diseaseType": "Bacterial"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Mango",
+      "scientificName": "Mangifera indica",
+      "family": "Anacardiaceae",
+      "genus": "Mangifera",
+      "species": "indica",
+      "variety": "Carabao mango",
+      "age": 15,
+      "growthStage": "Seedling",
+      "datePlanted": null,
+      "temp": 27,
+      "humidity": 75,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Mango Malformation",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Anthracnose",
+        "diseaseType": "Fungal"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Banana",
+      "scientificName": "Musa spp.",
+      "family": "Musaceae",
+      "genus": "Musa",
+      "species": "acuminata",
+      "variety": "Cavendish",
+      "age": 10.5,
+      "growthStage": "Flowering",
+      "datePlanted": null,
+      "temp": 30,
+      "humidity": 85,
+      "soilMoisture": "Wet"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Panama Disease",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Black Sigatoka",
+        "diseaseType": "Fungal"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Coconut",
+      "scientificName": "Cocos nucifera",
+      "family": "Arecaceae",
+      "genus": "Cocos",
+      "species": "nucifera",
+      "variety": "Tall",
+      "age": 80,
+      "growthStage": "Seedling",
+      "datePlanted": null,
+      "temp": 29.5,
+      "humidity": 70,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Bud Rot",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Lethal Yellowing",
+        "diseaseType": "Phytoplasma"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Sugarcane",
+      "scientificName": "Saccharum officinarum",
+      "family": "Poaceae",
+      "genus": "Saccharum",
+      "species": "officinarum",
+      "variety": "Phil 99-1793",
+      "age": 14,
+      "growthStage": "Maturation",
+      "datePlanted": null,
+      "temp": 27.5,
+      "humidity": 80,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Red Rot",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Top Shoot Borer",
+        "diseaseType": "Insect"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Tomato",
+      "scientificName": "Solanum lycopersicum",
+      "family": "Solanaceae",
+      "genus": "Solanum",
+      "species": "lycopersicum",
+      "variety": "Ruby Red",
+      "age": 75,
+      "growthStage": "Seedling",
+      "datePlanted": null,
+      "temp": 23.5,
+      "humidity": 60,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Early Blight",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Late Blight",
+        "diseaseType": "Fungal"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Eggplant",
+      "scientificName": "Solanum melongena",
+      "family": "Solanaceae",
+      "genus": "Solanum",
+      "species": "melongena",
+      "variety": "Casino",
+      "age": 80,
+      "growthStage": "Seedling",
+      "datePlanted": null,
+      "temp": 25.5,
+      "humidity": 65,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Verticillium Wilt",
+        "diseaseType": "Fungal"
+      },
+      {
+        "commonDisease": "Fusarium Wilt",
+        "diseaseType": "Fungal"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Pineapple",
+      "scientificName": "Ananas comosus",
+      "family": "Bromeliaceae",
+      "genus": "Ananas",
+      "species": "comosus",
+      "variety": "Red Spanish",
+      "age": 21,
+      "growthStage": "Vegetative",
+      "datePlanted": null,
+      "temp": 27,
+      "humidity": 75,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Pink Mealybug Wilt",
+        "diseaseType": "Insect"
+      },
+      {
+        "commonDisease": "Heart Rot",
+        "diseaseType": "Fungal"
+      }
+    ]
+  },
+  {
+    "plantDetails": {
+      "commonName": "Papaya",
+      "scientificName": "Carica papaya",
+      "family": "Caricaceae",
+      "genus": "Carica",
+      "species": "papaya",
+      "variety": "Sinta",
+      "age": 9,
+      "growthStage": "Fruiting",
+      "datePlanted": null,
+      "temp": 27.5,
+      "humidity": 70,
+      "soilMoisture": "Moist"
+    },
+    "plantDiseases": [
+      {
+        "commonDisease": "Papaya Ringspot Virus",
+        "diseaseType": "Viral"
+      },
+      {
+        "commonDisease": "Bacterial Canker",
+        "diseaseType": "Bacterial"
+      }
+    ]
+  }
+]
