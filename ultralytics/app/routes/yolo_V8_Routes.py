@@ -79,3 +79,18 @@ def get_all_detections():
     except Exception as e:
         # Return error response in case of any failure
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+# New route for deleting a detection by ID
+@yolo_v8_routes.route('/delete_detection/<string:detection_id>', methods=['DELETE'])
+def delete_detection(detection_id):
+    try:
+        response = YoloV8Controller.delete_detection_byId(detection_id)
+
+        if response["status"] == "success":
+            return jsonify(response), 200
+        else:
+            return jsonify(response), 404
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500

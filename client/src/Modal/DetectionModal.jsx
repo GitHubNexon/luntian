@@ -122,7 +122,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
         console.log(formData);
       }
       onSaveData(formData); // Save the data
-      //   onClose();
+      onClose();
     } catch (error) {
       console.error("Error submitting detection data:", error);
       showToast("Something went wrong. Please try again.", "error");
@@ -233,7 +233,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                         onClick={openImageModal}
                       >
                         <img
-                          src={`data:image/jpeg;base64,${image.data}`} 
+                          src={`data:image/jpeg;base64,${image.data}`}
                           alt={`Uploaded ${index}`}
                           className="w-20 h-20 object-cover rounded-md"
                         />

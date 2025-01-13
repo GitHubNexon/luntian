@@ -18,22 +18,6 @@ const detectionApi = {
     }
   },
 
-  // getallDetections: async (
-  //   page = 1,
-  //   limit = 10,
-  //   keyword = "",
-  //   sortBy = "",
-  //   sortOrder = "asc"
-  // ) => {
-  //   const response = await axios.get(
-  //     `${API_BASE_URL}/yolo_v8/get_all_detections`,
-  //     {
-  //       params: { page, limit, keyword, sortBy, sortOrder },
-  //     }
-  //   );
-  //   return response.data;
-  // },
-
   getallDetections: async (
     page = 1,
     limit = 10,
@@ -69,6 +53,18 @@ const detectionApi = {
       return response.data;
     } catch (error) {
       console.error("Error updating budget track:", error);
+      throw error;
+    }
+  },
+
+  deleteDetectionById: async (id) => {
+    try {
+      const response = await axios.delete(
+        `${API_BASE_URL}/yolo_v8/delete_detection/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting detection:", error);
       throw error;
     }
   },

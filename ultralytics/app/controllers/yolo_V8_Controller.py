@@ -204,7 +204,7 @@ class YoloV8Controller:
                 query = {
                     "$or": [
                         {"image": {"$regex": keyword, "$options": "i"}},
-                        {"description": {"$regex": keyword, "$options": "i"}},
+                        {"details": {"$regex": keyword, "$options": "i"}},
                     ]
                 }
 
@@ -235,3 +235,23 @@ class YoloV8Controller:
 
         except Exception as e:
             return ({"status": "error", "message": str(e)},)
+
+
+    @staticmethod
+    def delete_detection_byId(detection_id):
+        try:
+            # Ensure the detection_id is valid
+            if not ObjectId.is_valid(detection_id):
+                return {"status": "error", "message": "Invalid detection_id format"}
+
+            # Attempt to delete the document
+            result = collection.delete_one({"_id": ObjectId(detection_id)})
+
+            # Check if the document was deleted
+            if result.deleted_count == 0:
+                return {"status": "error", "message": "Detection not found"}
+
+            return {"message": "Detection deleted successfully", "status": "success"}
+
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
