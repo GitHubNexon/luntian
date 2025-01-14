@@ -6,10 +6,10 @@ const plantController = require("../controllers/plantController");
 router.post("/", plantController.addPlantDetails);
 
 // PATCH route to update plant details by ID
-router.patch("/Update_Plant/:plantId", plantController.updatePlantDetails);
+router.patch("/Update_Plant/:id", plantController.updatePlantDetails);
 
 // DELETE route to delete plant details by ID
-router.delete("/Delete_Plant/:plantId", plantController.deletePlantDetails);
+router.delete("/Delete_Plant/:id", plantController.deletePlantDetails);
 
 // GET route to fetch all plant details with pagination, filtering, and sorting
 router.get("/Get-All-Plants", plantController.getAllPlants);

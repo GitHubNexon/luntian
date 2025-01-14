@@ -12,7 +12,9 @@
       "datePlanted": null,
       "temp": 27.5,
       "humidity": 80,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Oryza sativa, having the common name Asian cultivated rice, is one of the two rice species cultivated as a cereal, the other being O. glaberrima, African rice. It was first domesticated in the Yangtze River basin in China 13,500 to 8,200 years ago.",
+      "trivia": "Rice is central to many Asian cuisines and cultures, and it is considered sacred in some traditions. It is also a symbol of prosperity in many Asian rituals."
     },
     "plantDiseases": [
       {
@@ -38,7 +40,9 @@
       "datePlanted": null,
       "temp": 27,
       "humidity": 75,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Mangifera indica, commonly known as mango, is native to South Asia and has been cultivated for over 4,000 years. It is often referred to as the 'King of Fruits' in many cultures.",
+      "trivia": "In India, mango leaves are used in weddings and religious ceremonies for decoration and to symbolize good fortune."
     },
     "plantDiseases": [
       {
@@ -54,7 +58,7 @@
   {
     "plantDetails": {
       "commonName": "Banana",
-      "scientificName": "Musa spp.",
+      "scientificName": "Musa spp",
       "family": "Musaceae",
       "genus": "Musa",
       "species": "acuminata",
@@ -64,7 +68,9 @@
       "datePlanted": null,
       "temp": 30,
       "humidity": 85,
-      "soilMoisture": "Wet"
+      "soilMoisture": "Wet",
+      "description": "Musa spp., known as banana, is native to Southeast Asia. Bananas are one of the oldest cultivated crops, dating back 7,000 years in Papua New Guinea.",
+      "trivia": "Banana leaves are widely used in Asia for serving food, wrapping dishes, and even as umbrellas during monsoons."
     },
     "plantDiseases": [
       {
@@ -90,7 +96,9 @@
       "datePlanted": null,
       "temp": 29.5,
       "humidity": 70,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Cocos nucifera, commonly known as coconut, is believed to have originated in Southeast Asia and the Indian subcontinent. It is a versatile crop, providing food, oil, fiber, and wood.",
+      "trivia": "In Hindu culture, coconuts are offered during rituals and symbolize purity, prosperity, and nourishment."
     },
     "plantDiseases": [
       {
@@ -116,7 +124,9 @@
       "datePlanted": null,
       "temp": 27.5,
       "humidity": 80,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Saccharum officinarum, commonly known as sugarcane, originated in Southeast Asia and has been cultivated for thousands of years as a source of sugar and ethanol.",
+      "trivia": "Sugarcane juice is a popular refreshing drink across Asia, especially in countries like India, Thailand, and Vietnam."
     },
     "plantDiseases": [
       {
@@ -142,7 +152,9 @@
       "datePlanted": null,
       "temp": 23.5,
       "humidity": 60,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Solanum lycopersicum, known as tomato, originated in South America and was later brought to Asia through trade routes. It is now an integral part of Asian cuisines.",
+      "trivia": "In Asian cooking, tomatoes are often used in curries, soups, and sauces to add a tangy flavor and vibrant color."
     },
     "plantDiseases": [
       {
@@ -168,7 +180,9 @@
       "datePlanted": null,
       "temp": 25.5,
       "humidity": 65,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Solanum melongena, commonly known as eggplant or brinjal, is native to India and widely cultivated across Asia. It is a versatile vegetable used in many regional dishes.",
+      "trivia": "Eggplants are often featured in Asian folklore as symbols of prosperity and fertility, and they are a staple in dishes like Baingan Bharta and Terong Balado."
     },
     "plantDiseases": [
       {
@@ -194,33 +208,9 @@
       "datePlanted": null,
       "temp": 27,
       "humidity": 75,
-      "soilMoisture": "Moist"
-    },
-    "plantDiseases": [
-      {
-        "commonDisease": "Pink Mealybug Wilt",
-        "diseaseType": "Insect"
-      },
-      {
-        "commonDisease": "Heart Rot",
-        "diseaseType": "Fungal"
-      }
-    ]
-  },
-  {
-    "plantDetails": {
-      "commonName": "Papaya",
-      "scientificName": "Carica papaya",
-      "family": "Caricaceae",
-      "genus": "Carica",
-      "species": "papaya",
-      "variety": "Sinta",
-      "age": 9,
-      "growthStage": "Fruiting",
-      "datePlanted": null,
-      "temp": 27.5,
-      "humidity": 70,
-      "soilMoisture": "Moist"
+      "soilMoisture": "Moist",
+      "description": "Ananas comosus, commonly known as pineapple, is native to South America but has become a popular tropical fruit in Asia, particularly in the Philippines and Thailand.",
+      "trivia": "In many Asian cultures, pineapple symbolizes hospitality and good fortune, often displayed during Lunar New Year celebrations."
     },
     "plantDiseases": [
       {

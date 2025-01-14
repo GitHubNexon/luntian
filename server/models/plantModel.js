@@ -9,7 +9,9 @@ const plantDetailsSchema = new mongoose.Schema({
   variety: { type: String, required: true },
   age: { type: Number, required: true },
   growthStage: { type: String, required: true },
-  datePlanted: { type: Date, required: true },
+  datePlanted: { type: Date, required: false },
+  trivia: { type: String, required: true },
+  description: { type: String, required: true },
   temp: {
     type: Number,
     required: true, // Temperature in Celsius or Fahrenheit

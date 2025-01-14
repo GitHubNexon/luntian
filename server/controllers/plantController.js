@@ -22,11 +22,11 @@ const addPlantDetails = async (req, res) => {
 // PATCH method to update plant details by ID
 const updatePlantDetails = async (req, res) => {
   try {
-    const { plantId } = req.params;
+    const { id } = req.params;
     const { plantDetails } = req.body;
 
     const updatedPlant = await Plant.findByIdAndUpdate(
-      plantId,
+      id,
       { $set: { plantDetails } },
       { new: true }
     );
@@ -48,9 +48,9 @@ const updatePlantDetails = async (req, res) => {
 // DELETE method to delete plant by ID
 const deletePlantDetails = async (req, res) => {
   try {
-    const { plantId } = req.params;
+    const { id } = req.params;
 
-    const deletedPlant = await Plant.findByIdAndDelete(plantId);
+    const deletedPlant = await Plant.findByIdAndDelete(id);
 
     if (!deletedPlant) {
       return res.status(404).json({ error: "Plant not found" });

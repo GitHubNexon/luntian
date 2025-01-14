@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "prod": "pm2 start server.js",
-    "seed": "node models/seed.js"
+    "seed": "node models/seed.js",
+    "script1": "node helpers/scriptHelper.js"
   },
   "keywords": [],
   "author": "",
