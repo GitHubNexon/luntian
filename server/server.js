@@ -37,6 +37,7 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const baseRoutes = require("./routes/baseRoutes");
 const detectRoutes = require("./routes/detectRoutes");
+const plantRoutes = require("./routes/plantRoutes");
 
 // const { createDefaultUser } = require("./controllers/authController");
 // const { initializeDefaults } = require("./controllers/baseController");
@@ -68,6 +69,8 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/base", baseRoutes);
 app.use("/api/detect", detectRoutes);
+app.use("/api/plants", plantRoutes);
+
 
 // Start the server with Socket.IO
 server.listen(PORT, () => {

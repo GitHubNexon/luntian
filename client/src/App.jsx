@@ -14,6 +14,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import Detection from "./pages/Detection";
+import Plant from "./pages/Plant";
 
 function App() {
   useEffect(() => {
@@ -39,6 +40,14 @@ function App() {
                 element={
                   <Layout>
                     <Detection />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/Plant"
+                element={
+                  <Layout>
+                    <Plant />
                   </Layout>
                 }
               />

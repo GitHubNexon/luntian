@@ -25,6 +25,7 @@ import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 import DetectionModal from "../Modal/DetectionModal";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { format } from "timeago.js";
+import detectionApi from "../api/detectionApi";
 
 const DiseaseIcon = ({ disease, className }) => {
   const iconClasses = `${className} transition`;
@@ -49,7 +50,7 @@ const DiseaseIcon = ({ disease, className }) => {
         className={`${iconClasses} ${diseaseColorMap["Mosaic Virus"]}`}
       />
     ),
-    "Septoria": (
+    Septoria: (
       <FaDisease className={`${iconClasses} ${diseaseColorMap["Septoria"]}`} />
     ),
     "Yellow Curl Virus": (
@@ -243,21 +244,21 @@ const BudgetTable = () => {
     setIsDetectionModalOpen(true);
   };
 
-  //   const handleDeleteEntry = async (detectionId) => {
-  //     const confirmed = await showDialog.confirm(
-  //       `Are you sure you want to delete this Entry?`
-  //     );
-  //     if (!confirmed) return;
+    const handleDeleteDetection= async (detectionId) => {
+      const confirmed = await showDialog.confirm(
+        `Are you sure you want to delete this Detection?`
+      );
+      if (!confirmed) return;
 
-  //     try {
-  //       await BudgetTrackApi.deleteBudgetById(budgetId);
-  //       fetchBudgets();
-  //       showToast("Budget deleted successfully!", "success");
-  //     } catch (error) {
-  //       console.error("Error deleting Budget:", error);
-  //       showToast("Failed to delete Budget. Please try again.", "error");
-  //     }
-  //   };
+      try {
+        await detectionApi.deleteDetectionById(detectionId);
+        fetchDetectionData();
+        showToast("detection deleted successfully!", "success");
+      } catch (error) {
+        console.error("Error deleting detection:", error);
+        showToast("Failed to delete detection. Please try again.", "error");
+      }
+    };
 
   const handleFetchLatest = async () => {
     fetchDetectionData();
@@ -283,6 +284,11 @@ const BudgetTable = () => {
     //   ),
     //   width: "300px",
     // },
+    {
+      name: "Detection Id",
+      selector: (row) => row._id,
+      width: "300px",
+    },
     {
       name: "Details",
       cell: (row) => (
@@ -348,10 +354,10 @@ const BudgetTable = () => {
             </span>
           </div>
 
-          {/* Monitor Button */}
+          {/* delete Button */}
           <div className="group relative">
             <button
-              onClick={() => handleDeleteEntry(row._id)}
+              onClick={() => handleDeleteDetection(row._id)}
               className="text-white bg-red-600 p-2 rounded-md"
             >
               <FaTrash size={16} />
@@ -373,7 +379,7 @@ const BudgetTable = () => {
     <>
       <div className="mx-auto p-8">
         <div className="flex flex-col overflow-auto">
-          <h1 className="font-bold">All Budget Monitoring</h1>
+          <h1 className="font-bold">All Plant Diseases Detection</h1>
 
           <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2">
             {/* <label htmlFor="date">Created At</label>
@@ -392,7 +398,7 @@ const BudgetTable = () => {
             </button>
             <input
               type="text"
-              placeholder={`Search Entries`}
+              placeholder={`Search...`}
               className="border px-2 py-1 rounded-md"
               onChange={(e) => setQuery(e.target.value)}
             />
