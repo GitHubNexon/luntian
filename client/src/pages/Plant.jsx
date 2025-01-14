@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import PlantTable from "../components/plantTable";
 
 const Plant = () => {
   return (
-    <div>Plant</div>
-  )
-}
+    <div>
+      <PlantTable />
+    </div>
+  );
+};
 
-export default Plant
+export default Plant;
