@@ -122,15 +122,15 @@ class YoloV8Controller:
                     # Ensure the 'date' is stored as a datetime object
                     date_value = img.get("date", datetime.now())
                     if isinstance(date_value, str):
-                        # If the date is a string, convert it to a datetime object
-                        date_value = datetime.fromisoformat(
+                            # If the date is a string, convert it to a datetime object
+                            date_value = datetime.fromisoformat(
                             date_value.replace("Z", "+16:00:00")
                         )
                     # Append the image object with 'data' and 'date'
                     images.append(
                         {
                             "data": img["data"],
-                            "date": date_value,
+                            # "date": date_value,
                         }
                     )
                 update_data["images"] = images
