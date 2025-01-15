@@ -48,7 +48,7 @@ class YoloV8Model:
             image_objects.append(
                 {
                     "data": image.get("data"), 
-                    "date": date_value,
+                    "date": timestamp,
                 }
             )
 
