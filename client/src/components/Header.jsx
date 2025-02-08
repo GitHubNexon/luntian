@@ -2,19 +2,20 @@ import React, { useContext, useState } from "react";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { MiscContext } from "../context/MiscContext";
-import { UserContext } from "../context/UserContext"; // Import the UserContext
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 import defaultImg from "../assets/Images/default-img.png";
 import TabBar from "../routes/TabBar";
-import { AiOutlineLogout } from "react-icons/ai"; // Import logout icon
-import { useAuth } from "../context/AuthContext"; // Import AuthContext to access logout function
+import { AiOutlineLogout } from "react-icons/ai";
+import { useAuth } from "../context/AuthContext";
+import Mode from "../components/Mode";
 
 const Header = () => {
   const { expandSidebar, setExpandSidebar } = useContext(MiscContext);
   const [isProfileHoverVisible, setProfileHoverVisible] = useState(false);
   const { profileImage } = useContext(UserContext);
-  const { logout } = useAuth(); // Get the logout function from context
-  const navigate = useNavigate(); // Initialize navigate function
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   function toggleSidebar() {
     setExpandSidebar(!expandSidebar);
@@ -34,7 +35,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-[#38572ACC] text-white p-2 flex justify-between items-center">
+    <div className="p-2 flex justify-between items-center">
       <div>
         <button className="text-[1.7em] md:hidden" onClick={toggleSidebar}>
           <MdOutlineMenuBook
@@ -48,12 +49,13 @@ const Header = () => {
         <TabBar />
       </div>
 
+      <Mode />
       <button
         onClick={handleLogout}
-        className="flex items-center p-2 text-white rounded-md hover:bg-gray-700 transition-colors max-md:hidden"
+        className="flex items-center p-2 rounded-md  transition-colors max-md:hidden ml-2"
       >
         <AiOutlineLogout size={20} />
-        <span className="ml-2">Logout</span>
+        <span className="ml-2 ">Logout</span>
       </button>
     </div>
   );

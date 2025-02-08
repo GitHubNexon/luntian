@@ -1,5 +1,8 @@
 import Swal from "sweetalert2";
 
+const getCSSVariable = (variable) =>
+  getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+
 const showDialog = {
   confirm: async (message) => {
     const result = await Swal.fire({
@@ -7,8 +10,8 @@ const showDialog = {
       text: message,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
+      confirmButtonColor: getCSSVariable("--primary-color"),
+      cancelButtonColor: getCSSVariable("--secondary-color"),
       confirmButtonText: "Yes, proceed!",
       cancelButtonText: "No, cancel!",
     });
@@ -20,6 +23,7 @@ const showDialog = {
       icon: type,
       title: type === "success" ? "Success!" : "Oops!",
       text: message,
+      confirmButtonColor: getCSSVariable("--highlight-color"),
     });
   },
 };

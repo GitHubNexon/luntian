@@ -170,7 +170,7 @@ const PlantTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleModalOpenForEdit(row)}
-              className="text-white bg-blue-600 p-2 rounded-md"
+              className=" p-2 rounded-md"
             >
               <FaEdit size={16} />
             </button>
@@ -183,7 +183,7 @@ const PlantTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleDeleteDetection(row._id)}
-              className="text-white bg-red-600 p-2 rounded-md"
+              className="0 p-2 rounded-md"
             >
               <FaTrash size={16} />
             </button>
@@ -206,7 +206,7 @@ const PlantTable = () => {
         <div className="flex flex-col overflow-auto">
           <h1 className="font-bold">All Plant Diseases Detection</h1>
 
-          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2">
+          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2 modeDiv">
             {/* <label htmlFor="date">Created At</label>
         <input
           type="date"
