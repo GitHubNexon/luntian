@@ -1,34 +1,24 @@
 const Plant = require("../models/plantModel");
 
-// POST method to add new plant details
 const addPlantDetails = async (req, res) => {
   try {
-    const { plantDetails } = req.body;
-
-    const newPlant = new Plant({
-      plantDetails,
+    const newPlant = await Plant.create(req.body);
+    res.status(201).json({
+      message: "Plant details added successfully",
+      data: newPlant,
     });
-
-    await newPlant.save();
-    res
-      .status(201)
-      .json({ message: "Plant details added successfully", data: newPlant });
   } catch (error) {
     console.error("Error adding plant details:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-// PATCH method to update plant details by ID
 const updatePlantDetails = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { plantDetails } = req.body;
-
     const updatedPlant = await Plant.findByIdAndUpdate(
-      id,
-      { $set: { plantDetails } },
-      { new: true }
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
     );
 
     if (!updatedPlant) {
@@ -44,7 +34,6 @@ const updatePlantDetails = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 // DELETE method to delete plant by ID
 const deletePlantDetails = async (req, res) => {
   try {

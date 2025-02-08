@@ -9,9 +9,6 @@
       "variety": "IR64, NSIC Rc160",
       "age": 105,
       "growthStage": "Germination",
-      "datePlanted": null,
-      "temp": 27.5,
-      "humidity": 80,
       "soilMoisture": "Moist",
       "description": "Oryza sativa, commonly known as Asian cultivated rice, is one of the most widely grown cereal crops globally.",
       "trivia": "Rice is a staple food for more than half of the world's population."
@@ -31,9 +28,6 @@
       "variety": "Sweet Corn",
       "age": 75,
       "growthStage": "Vegetative",
-      "datePlanted": null,
-      "temp": 26,
-      "humidity": 70,
       "soilMoisture": "Moist",
       "description": "Zea mays, commonly known as corn or maize, is a major cereal grain first domesticated in southern Mexico.",
       "trivia": "Corn is used in a variety of products, including food, fuel, and biodegradable plastics."
@@ -53,10 +47,7 @@
       "variety": "Cherry Tomato",
       "age": 60,
       "growthStage": "Flowering",
-      "datePlanted": null,
-      "temp": 23.5,
-      "humidity": 60,
-      "soilMoisture": "Moist",
+
       "description": "Solanum lycopersicum, known as tomato, is a widely cultivated fruit used in cooking worldwide.",
       "trivia": "Tomatoes were once believed to be poisonous and were called 'poison apples' in the 18th century."
     },
@@ -75,10 +66,6 @@
       "variety": "Black Beauty",
       "age": 80,
       "growthStage": "Seedling",
-      "datePlanted": null,
-      "temp": 25.5,
-      "humidity": 65,
-      "soilMoisture": "Moist",
       "description": "Solanum melongena, commonly known as eggplant, is a versatile vegetable used in various cuisines.",
       "trivia": "Eggplants are technically berries, not vegetables!"
     },
@@ -97,10 +84,6 @@
       "variety": "Kangkong",
       "age": 30,
       "growthStage": "Vegetative",
-      "datePlanted": null,
-      "temp": 28,
-      "humidity": 85,
-      "soilMoisture": "Wet",
       "description": "Ipomoea aquatica, also known as kangkong or water spinach, is a fast-growing leafy vegetable commonly cultivated in water."
     },
     "plantDiseases": []
@@ -115,10 +98,6 @@
       "variety": "Solo",
       "age": 120,
       "growthStage": "Fruit-bearing",
-      "datePlanted": null,
-      "temp": 30,
-      "humidity": 75,
-      "soilMoisture": "Moist",
       "description": "Carica papaya, commonly known as papaya, is a tropical fruit known for its sweet taste and nutritional benefits."
     },
     "plantDiseases": [

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const plantDetailsSchema = new mongoose.Schema({
-  commonName: { type: String, required: true },
+  commonName: { type: String, required: false },
   plantImage: { type: String, required: false },
   scientificName: { type: String, required: false },
   family: { type: String, required: false },
@@ -10,21 +10,8 @@ const plantDetailsSchema = new mongoose.Schema({
   variety: { type: String, required: false },
   age: { type: Number, required: false },
   growthStage: { type: String, required: false },
-  datePlanted: { type: Date, required: false },
   trivia: { type: String, required: false },
-  description: { type: String, required: true },
-  temp: {
-    type: Number,
-    required: false,
-  },
-  humidity: {
-    type: Number,
-    required: false,
-  },
-  soilMoisture: {
-    type: String,
-    required: false,
-  },
+  description: { type: String, required: false },
 });
 
 const plantDiseasesSchema = new mongoose.Schema({

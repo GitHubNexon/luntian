@@ -58,7 +58,7 @@ p {
 }
 
 button {
-  color: var(--secondary-color);
+  color: var(--text-color);
   transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
 }
 
