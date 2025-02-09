@@ -169,7 +169,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
         console.log(formData);
       }
       onSaveData(formData); // Save the data
-      //   onClose();
+      onClose();
     } catch (error) {
       console.error("Error submitting Plant data:", error);
       showToast("Something went wrong. Please try again.", "error");

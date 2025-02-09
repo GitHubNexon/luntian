@@ -1,8 +1,11 @@
 import React from 'react'
+import LiveDetection from '../components/LiveDetection'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>Dashboard
+      <LiveDetection />
+    </div>
   )
 }
 
