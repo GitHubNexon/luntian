@@ -140,7 +140,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
   return (
     <>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-        <div className="bg-white p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh]">
+        <div className="p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh] modeDiv">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">
               {mode === "edit" ? "Edit Detection" : "Add Detection"}
@@ -154,7 +154,6 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   onClose();
                 }
               }}
-              className="text-gray-500 hover:text-gray-800"
             >
               <FaTimes size={25} />
             </button>
@@ -184,12 +183,12 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   name="description"
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
-                  className="border border-gray-300 p-2 rounded-md bg-gray-100 text-gray-500 resize-none h-[100px]"
+                  className="border border-gray-300 p-2 rounded-md text-gray-500 resize-none h-[100px]"
                 />
                 <button
                   type="button"
                   onClick={handleAddDescription}
-                  className="bg-[#38572ACC] text-white py-1 px-3 rounded-md mt-2 hover:bg-[#213318cc]"
+                  className=" py-1 px-3 rounded-md mt-2 bg-[var(--primary-color)]"
                 >
                   Add Description
                 </button>
@@ -197,11 +196,11 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   <h3>Descriptions:</h3>
                   {formData.description.map((desc, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <p className="text-sm text-gray-600">{desc}</p>
+                      <p className="text-sm ">{desc}</p>
                       <button
                         type="button"
                         onClick={() => handleRemoveDescription(index)}
-                        className="text-red-500 hover:text-red-700 text-sm"
+                        className=" text-sm"
                       >
                         Remove
                       </button>
@@ -233,7 +232,8 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                         onClick={openImageModal}
                       >
                         <img
-                          src={`data:image/jpeg;base64,${image.data}`}
+                          // src={`data:image/jpeg;base64,${image.data}`}
+                          src={image.data}
                           alt={`Uploaded ${index}`}
                           className="w-20 h-20 object-cover rounded-md"
                         />
@@ -270,7 +270,8 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={`data:image/jpeg;base64,${formData.images[0].data}`} // Show the first image from the array
+              // src={`data:image/jpeg;base64,${formData.images[0].data}`} // Show the first image from the array
+              src={formData.images[0].data} // Show the first image from the array
               alt="Expanded view"
               className="object-contain w-full h-full"
               style={{ maxWidth: "100vw", maxHeight: "100vh" }}

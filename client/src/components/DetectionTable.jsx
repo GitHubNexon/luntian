@@ -244,21 +244,21 @@ const BudgetTable = () => {
     setIsDetectionModalOpen(true);
   };
 
-    const handleDeleteDetection= async (detectionId) => {
-      const confirmed = await showDialog.confirm(
-        `Are you sure you want to delete this Detection?`
-      );
-      if (!confirmed) return;
+  const handleDeleteDetection = async (detectionId) => {
+    const confirmed = await showDialog.confirm(
+      `Are you sure you want to delete this Detection?`
+    );
+    if (!confirmed) return;
 
-      try {
-        await detectionApi.deleteDetectionById(detectionId);
-        fetchDetectionData();
-        showToast("detection deleted successfully!", "success");
-      } catch (error) {
-        console.error("Error deleting detection:", error);
-        showToast("Failed to delete detection. Please try again.", "error");
-      }
-    };
+    try {
+      await detectionApi.deleteDetectionById(detectionId);
+      fetchDetectionData();
+      showToast("detection deleted successfully!", "success");
+    } catch (error) {
+      console.error("Error deleting detection:", error);
+      showToast("Failed to delete detection. Please try again.", "error");
+    }
+  };
 
   const handleFetchLatest = async () => {
     fetchDetectionData();
@@ -345,7 +345,7 @@ const BudgetTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleModalOpenForEdit(row)}
-              className="text-white bg-blue-600 p-2 rounded-md"
+              className=" p-2 rounded-md"
             >
               <FaEdit size={16} />
             </button>
@@ -358,7 +358,7 @@ const BudgetTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleDeleteDetection(row._id)}
-              className="text-white bg-red-600 p-2 rounded-md"
+              className=" p-2 rounded-md"
             >
               <FaTrash size={16} />
             </button>
@@ -381,7 +381,7 @@ const BudgetTable = () => {
         <div className="flex flex-col overflow-auto">
           <h1 className="font-bold">All Plant Diseases Detection</h1>
 
-          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2">
+          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2 modeDiv">
             {/* <label htmlFor="date">Created At</label>
             <input
               type="date"

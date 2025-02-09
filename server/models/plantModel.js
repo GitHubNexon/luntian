@@ -1,34 +1,23 @@
 const mongoose = require("mongoose");
 
 const plantDetailsSchema = new mongoose.Schema({
-  commonName: { type: String, required: true },
-  scientificName: { type: String, required: true },
-  family: { type: String, required: true },
-  genus: { type: String, required: true },
-  species: { type: String, required: true },
-  variety: { type: String, required: true },
-  age: { type: Number, required: true },
-  growthStage: { type: String, required: true },
-  datePlanted: { type: Date, required: false },
-  trivia: { type: String, required: true },
-  description: { type: String, required: true },
-  temp: {
-    type: Number,
-    required: true, // Temperature in Celsius or Fahrenheit
-  },
-  humidity: {
-    type: Number,
-    required: true, // Relative humidity percentage ex: 60RH
-  },
-  soilMoisture: {
-    type: String,
-    required: true, // Soil moisture as a percentage or level (e.g., dry, moist, wet)
-  },
+  commonName: { type: String, required: false },
+  plantImage: { type: String, required: false },
+  scientificName: { type: String, required: false },
+  family: { type: String, required: false },
+  genus: { type: String, required: false },
+  species: { type: String, required: false },
+  variety: { type: String, required: false },
+  age: { type: Number, required: false },
+  growthStage: { type: String, required: false },
+  trivia: { type: String, required: false },
+  description: { type: String, required: false },
 });
 
 const plantDiseasesSchema = new mongoose.Schema({
-  commonDisease: { type: String, required: true },
-  diseaseType: { type: String, required: true },
+  diseaseImage: { type: String, required: false },
+  commonDisease: { type: [String], required: false },
+  diseaseType: { type: String, required: false },
 });
 
 const plantSchema = new mongoose.Schema(

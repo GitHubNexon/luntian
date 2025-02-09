@@ -9,134 +9,32 @@
       "variety": "IR64, NSIC Rc160",
       "age": 105,
       "growthStage": "Germination",
-      "datePlanted": null,
-      "temp": 27.5,
-      "humidity": 80,
       "soilMoisture": "Moist",
-      "description": "Oryza sativa, having the common name Asian cultivated rice, is one of the two rice species cultivated as a cereal, the other being O. glaberrima, African rice. It was first domesticated in the Yangtze River basin in China 13,500 to 8,200 years ago.",
-      "trivia": "Rice is central to many Asian cuisines and cultures, and it is considered sacred in some traditions. It is also a symbol of prosperity in many Asian rituals."
+      "description": "Oryza sativa, commonly known as Asian cultivated rice, is one of the most widely grown cereal crops globally.",
+      "trivia": "Rice is a staple food for more than half of the world's population."
     },
     "plantDiseases": [
-      {
-        "commonDisease": "Rice Blast",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Bacterial Blight",
-        "diseaseType": "Bacterial"
-      }
+      { "commonDisease": "Rice Blast", "diseaseType": "Fungal" },
+      { "commonDisease": "Bacterial Blight", "diseaseType": "Bacterial" }
     ]
   },
   {
     "plantDetails": {
-      "commonName": "Mango",
-      "scientificName": "Mangifera indica",
-      "family": "Anacardiaceae",
-      "genus": "Mangifera",
-      "species": "indica",
-      "variety": "Carabao mango",
-      "age": 15,
-      "growthStage": "Seedling",
-      "datePlanted": null,
-      "temp": 27,
-      "humidity": 75,
-      "soilMoisture": "Moist",
-      "description": "Mangifera indica, commonly known as mango, is native to South Asia and has been cultivated for over 4,000 years. It is often referred to as the 'King of Fruits' in many cultures.",
-      "trivia": "In India, mango leaves are used in weddings and religious ceremonies for decoration and to symbolize good fortune."
-    },
-    "plantDiseases": [
-      {
-        "commonDisease": "Mango Malformation",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Anthracnose",
-        "diseaseType": "Fungal"
-      }
-    ]
-  },
-  {
-    "plantDetails": {
-      "commonName": "Banana",
-      "scientificName": "Musa spp",
-      "family": "Musaceae",
-      "genus": "Musa",
-      "species": "acuminata",
-      "variety": "Cavendish",
-      "age": 10.5,
-      "growthStage": "Flowering",
-      "datePlanted": null,
-      "temp": 30,
-      "humidity": 85,
-      "soilMoisture": "Wet",
-      "description": "Musa spp., known as banana, is native to Southeast Asia. Bananas are one of the oldest cultivated crops, dating back 7,000 years in Papua New Guinea.",
-      "trivia": "Banana leaves are widely used in Asia for serving food, wrapping dishes, and even as umbrellas during monsoons."
-    },
-    "plantDiseases": [
-      {
-        "commonDisease": "Panama Disease",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Black Sigatoka",
-        "diseaseType": "Fungal"
-      }
-    ]
-  },
-  {
-    "plantDetails": {
-      "commonName": "Coconut",
-      "scientificName": "Cocos nucifera",
-      "family": "Arecaceae",
-      "genus": "Cocos",
-      "species": "nucifera",
-      "variety": "Tall",
-      "age": 80,
-      "growthStage": "Seedling",
-      "datePlanted": null,
-      "temp": 29.5,
-      "humidity": 70,
-      "soilMoisture": "Moist",
-      "description": "Cocos nucifera, commonly known as coconut, is believed to have originated in Southeast Asia and the Indian subcontinent. It is a versatile crop, providing food, oil, fiber, and wood.",
-      "trivia": "In Hindu culture, coconuts are offered during rituals and symbolize purity, prosperity, and nourishment."
-    },
-    "plantDiseases": [
-      {
-        "commonDisease": "Bud Rot",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Lethal Yellowing",
-        "diseaseType": "Phytoplasma"
-      }
-    ]
-  },
-  {
-    "plantDetails": {
-      "commonName": "Sugarcane",
-      "scientificName": "Saccharum officinarum",
+      "commonName": "Corn",
+      "scientificName": "Zea mays",
       "family": "Poaceae",
-      "genus": "Saccharum",
-      "species": "officinarum",
-      "variety": "Phil 99-1793",
-      "age": 14,
-      "growthStage": "Maturation",
-      "datePlanted": null,
-      "temp": 27.5,
-      "humidity": 80,
+      "genus": "Zea",
+      "species": "mays",
+      "variety": "Sweet Corn",
+      "age": 75,
+      "growthStage": "Vegetative",
       "soilMoisture": "Moist",
-      "description": "Saccharum officinarum, commonly known as sugarcane, originated in Southeast Asia and has been cultivated for thousands of years as a source of sugar and ethanol.",
-      "trivia": "Sugarcane juice is a popular refreshing drink across Asia, especially in countries like India, Thailand, and Vietnam."
+      "description": "Zea mays, commonly known as corn or maize, is a major cereal grain first domesticated in southern Mexico.",
+      "trivia": "Corn is used in a variety of products, including food, fuel, and biodegradable plastics."
     },
     "plantDiseases": [
-      {
-        "commonDisease": "Red Rot",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Top Shoot Borer",
-        "diseaseType": "Insect"
-      }
+      { "commonDisease": "Maize Streak Virus", "diseaseType": "Viral" },
+      { "commonDisease": "Northern Corn Leaf Blight", "diseaseType": "Fungal" }
     ]
   },
   {
@@ -146,25 +44,16 @@
       "family": "Solanaceae",
       "genus": "Solanum",
       "species": "lycopersicum",
-      "variety": "Ruby Red",
-      "age": 75,
-      "growthStage": "Seedling",
-      "datePlanted": null,
-      "temp": 23.5,
-      "humidity": 60,
-      "soilMoisture": "Moist",
-      "description": "Solanum lycopersicum, known as tomato, originated in South America and was later brought to Asia through trade routes. It is now an integral part of Asian cuisines.",
-      "trivia": "In Asian cooking, tomatoes are often used in curries, soups, and sauces to add a tangy flavor and vibrant color."
+      "variety": "Cherry Tomato",
+      "age": 60,
+      "growthStage": "Flowering",
+
+      "description": "Solanum lycopersicum, known as tomato, is a widely cultivated fruit used in cooking worldwide.",
+      "trivia": "Tomatoes were once believed to be poisonous and were called 'poison apples' in the 18th century."
     },
     "plantDiseases": [
-      {
-        "commonDisease": "Early Blight",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Late Blight",
-        "diseaseType": "Fungal"
-      }
+      { "commonDisease": "Early Blight", "diseaseType": "Fungal" },
+      { "commonDisease": "Late Blight", "diseaseType": "Fungal" }
     ]
   },
   {
@@ -174,53 +63,45 @@
       "family": "Solanaceae",
       "genus": "Solanum",
       "species": "melongena",
-      "variety": "Casino",
+      "variety": "Black Beauty",
       "age": 80,
       "growthStage": "Seedling",
-      "datePlanted": null,
-      "temp": 25.5,
-      "humidity": 65,
-      "soilMoisture": "Moist",
-      "description": "Solanum melongena, commonly known as eggplant or brinjal, is native to India and widely cultivated across Asia. It is a versatile vegetable used in many regional dishes.",
-      "trivia": "Eggplants are often featured in Asian folklore as symbols of prosperity and fertility, and they are a staple in dishes like Baingan Bharta and Terong Balado."
+      "description": "Solanum melongena, commonly known as eggplant, is a versatile vegetable used in various cuisines.",
+      "trivia": "Eggplants are technically berries, not vegetables!"
     },
     "plantDiseases": [
-      {
-        "commonDisease": "Verticillium Wilt",
-        "diseaseType": "Fungal"
-      },
-      {
-        "commonDisease": "Fusarium Wilt",
-        "diseaseType": "Fungal"
-      }
+      { "commonDisease": "Verticillium Wilt", "diseaseType": "Fungal" },
+      { "commonDisease": "Fusarium Wilt", "diseaseType": "Fungal" }
     ]
   },
   {
     "plantDetails": {
-      "commonName": "Pineapple",
-      "scientificName": "Ananas comosus",
-      "family": "Bromeliaceae",
-      "genus": "Ananas",
-      "species": "comosus",
-      "variety": "Red Spanish",
-      "age": 21,
+      "commonName": "Water Spinach",
+      "scientificName": "Ipomoea aquatica",
+      "family": "Convolvulaceae",
+      "genus": "Ipomoea",
+      "species": "aquatica",
+      "variety": "Kangkong",
+      "age": 30,
       "growthStage": "Vegetative",
-      "datePlanted": null,
-      "temp": 27,
-      "humidity": 75,
-      "soilMoisture": "Moist",
-      "description": "Ananas comosus, commonly known as pineapple, is native to South America but has become a popular tropical fruit in Asia, particularly in the Philippines and Thailand.",
-      "trivia": "In many Asian cultures, pineapple symbolizes hospitality and good fortune, often displayed during Lunar New Year celebrations."
+      "description": "Ipomoea aquatica, also known as kangkong or water spinach, is a fast-growing leafy vegetable commonly cultivated in water."
+    },
+    "plantDiseases": []
+  },
+  {
+    "plantDetails": {
+      "commonName": "Papaya",
+      "scientificName": "Carica papaya",
+      "family": "Caricaceae",
+      "genus": "Carica",
+      "species": "papaya",
+      "variety": "Solo",
+      "age": 120,
+      "growthStage": "Fruit-bearing",
+      "description": "Carica papaya, commonly known as papaya, is a tropical fruit known for its sweet taste and nutritional benefits."
     },
     "plantDiseases": [
-      {
-        "commonDisease": "Papaya Ringspot Virus",
-        "diseaseType": "Viral"
-      },
-      {
-        "commonDisease": "Bacterial Canker",
-        "diseaseType": "Bacterial"
-      }
+      { "commonDisease": "Papaya Ringspot Virus", "diseaseType": "Viral" }
     ]
   }
 ]

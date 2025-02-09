@@ -6,7 +6,15 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from services.detection_services import detect_from_image
+from services.detection_services import (
+    start_live_detection,
+    stop_live_detection,
+    video_feed,
+)
 import pytz
+import cv2
+import threading
+import base64
 
 philippines_tz = pytz.timezone("Asia/Manila")
 
@@ -52,7 +60,7 @@ class YoloV8Controller:
             # Decode date
             date_value = img.get("date", datetime.now(philippines_tz))
             if isinstance(date_value, str):
-                    date_value = datetime.fromisoformat(date_value)
+                date_value = datetime.fromisoformat(date_value)
             date_value = date_value.astimezone(philippines_tz)
             print(date_value)
 
@@ -122,8 +130,8 @@ class YoloV8Controller:
                     # Ensure the 'date' is stored as a datetime object
                     date_value = img.get("date", datetime.now())
                     if isinstance(date_value, str):
-                            # If the date is a string, convert it to a datetime object
-                            date_value = datetime.fromisoformat(
+                        # If the date is a string, convert it to a datetime object
+                        date_value = datetime.fromisoformat(
                             date_value.replace("Z", "+16:00:00")
                         )
                     # Append the image object with 'data' and 'date'
@@ -236,7 +244,6 @@ class YoloV8Controller:
         except Exception as e:
             return ({"status": "error", "message": str(e)},)
 
-
     @staticmethod
     def delete_detection_byId(detection_id):
         try:
@@ -253,5 +260,28 @@ class YoloV8Controller:
 
             return {"message": "Detection deleted successfully", "status": "success"}
 
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
+    @staticmethod
+    def start_live_detection():
+        try:
+            response = start_live_detection()
+            return response
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
+    @staticmethod
+    def stop_live_detection():
+        try:
+            response = stop_live_detection()
+            return response
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
+    @staticmethod
+    def video_feed():
+        try:
+            return video_feed()
         except Exception as e:
             return {"status": "error", "message": str(e)}

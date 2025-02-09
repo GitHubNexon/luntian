@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify
 from controllers.yolo_V8_Controller import YoloV8Controller
+from services.detection_services import detect_from_live
+
+
 
 # Define the blueprint for YOLOv8 routes
 yolo_v8_routes = Blueprint('yolo_v8', __name__)
@@ -94,3 +97,32 @@ def delete_detection(detection_id):
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+
+    
+@yolo_v8_routes.route('/start_live_detection', methods=['POST'])
+def start_live_detection_route():
+    try:
+        response = YoloV8Controller.start_live_detection()
+        if response['status'] == 'success':
+            return jsonify(response), 200
+        else:
+            return jsonify(response), 400
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@yolo_v8_routes.route('/stop_live_detection', methods=['POST'])
+def stop_live_detection_route():
+    try:
+        response = YoloV8Controller.stop_live_detection()
+        if response['status'] == 'success':
+            return jsonify(response), 200
+        else:
+            return jsonify(response), 400
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@yolo_v8_routes.route("/video_feed", methods=["GET"])
+def video_feed_route():
+    return YoloV8Controller.video_feed()
+

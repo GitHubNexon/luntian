@@ -174,21 +174,18 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
       }`}
     >
       <div
-        className="bg-white p-6 rounded-lg shadow-lg relative w-[400px] max-w-full max-h-[90vh] overflow-y-auto"
+        className="p-6 rounded-lg relative w-[400px] max-w-full max-h-[90vh] overflow-y-auto modeDiv"
         data-aos="zoom-in"
         data-aos-duration="500"
       >
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-2 text-gray-500 hover:text-gray-800"
-        >
+        <button onClick={onClose} className="absolute top-5 right-2 ">
           <FaTimes size={25} />
         </button>
         <h2 className="text-lg font-semibold mb-4">
           {mode === "add" ? "Add New User" : "Edit User"}
         </h2>
         <form onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && <p className="">{error}</p>}
           <div className="mb-4">
             <label className="block text-gray-700">Username *</label>
             <input
@@ -244,7 +241,7 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="mt-1 text-blue-500 hover:text-blue-700"
+                className="mt-1 "
               >
                 {showPassword ? "Hide Password" : "Show Password"}
               </button>
@@ -252,7 +249,7 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
           )}
           {mode === "edit" && (
             <div className="mb-4">
-              <label className="block text-gray-700">New Password</label>
+              <label className="block ">New Password</label>
               <input
                 type={showNewPassword ? "text" : "password"}
                 value={newPassword}
@@ -263,7 +260,7 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
               <button
                 type="button"
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="mt-1 text-blue-500 hover:text-blue-700"
+                className="mt-1 "
               >
                 {showNewPassword ? "Hide Password" : "Show Password"}
               </button>
@@ -276,13 +273,13 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
                 handleClear();
                 onClose();
               }}
-              className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md mr-2"
+              className=" px-4 py-2 rounded-md mr-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              className=" px-4 py-2 rounded-md"
               // disabled={loading}
             >
               {loading ? "Save" : mode === "add" ? "Add User" : "Save Changes"}

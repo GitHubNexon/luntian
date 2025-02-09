@@ -21,7 +21,155 @@ import plantApi from "../api/plantApi";
 import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { format } from "timeago.js";
+import PlantModal from "../Modal/PlantModal";
 
+const ExpandedRowComponent = ({ data }) => {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [filteredDiseaseLogs, setFilteredDiseaseLogs] = useState([]);
+  const [showAllImages, setShowAllImages] = useState(false);
+
+  useEffect(() => {
+    if (data && data.plantDiseases) {
+      const updatedFilteredLogs = data.plantDiseases.map((disease) => ({
+        diseaseType: disease.diseaseType,
+        commonDisease: disease.commonDisease.join(", "),
+        // Ensure diseaseImage is always an array
+        diseaseImages: disease.diseaseImage ? [disease.diseaseImage] : [],
+      }));
+      setFilteredDiseaseLogs(updatedFilteredLogs);
+    }
+  }, [data]);
+
+  const renderData = (value) => (value ? value : "N/A");
+
+  const renderImages = (imageBase64) => {
+    if (!imageBase64) return null;
+    return (
+      <div
+        className="relative w-64 h-64 cursor-pointer"
+        onClick={() => {
+          setSelectedImage(imageBase64);
+          setIsImageModalOpen(true);
+        }}
+      >
+        <img
+          src={imageBase64}
+          alt="Plant"
+          className="object-cover w-full h-full rounded-lg shadow-md"
+        />
+      </div>
+    );
+  };
+
+  return (
+    <div className=" mx-auto p-10 bg-white shadow-lg rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Image Section */}
+        <div className="md:col-span-1 flex justify-center">
+          {renderImages(data.plantDetails.plantImage)}
+        </div>
+
+        {/* Details Section */}
+        <div className="md:col-span-2 space-y-4">
+          {isImageModalOpen && selectedImage && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+              onClick={() => setIsImageModalOpen(false)}
+            >
+              <div
+                className="relative bg-white p-4 rounded-lg shadow-lg"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={selectedImage}
+                  alt="Expanded view"
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Plant Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-100 p-4 rounded-lg">
+            <div>
+              <span className="font-bold text-lg">Common Name:</span>
+              <span className="text-gray-700">
+                {" "}
+                {renderData(data.plantDetails.commonName)}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-lg">Scientific Name:</span>
+              <span className="text-gray-700">
+                {" "}
+                {renderData(data.plantDetails.scientificName)}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-lg">Family:</span>
+              <span className="text-gray-700">
+                {" "}
+                {renderData(data.plantDetails.family)}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-lg">Growth Stage:</span>
+              <span className="text-gray-700">
+                {" "}
+                {renderData(data.plantDetails.growthStage)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Disease Logs */}
+        <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow">
+          <span className="font-bold text-lg block mb-4">Plant Diseases:</span>
+          <div className="space-y-4">
+            {filteredDiseaseLogs.map((log, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+                <span className="text-gray-700 font-medium">
+                  {log.commonDisease} ({log.diseaseType})
+                </span>
+                <div
+                  className={`grid ${
+                    log.diseaseImages.length > 4
+                      ? "grid-cols-2"
+                      : "flex flex-wrap"
+                  } gap-2 mt-2`}
+                >
+                  {log.diseaseImages
+                    .slice(0, showAllImages ? log.diseaseImages.length : 4)
+                    .map((img, imgIndex) => (
+                      <img
+                        key={imgIndex}
+                        src={img}
+                        alt={`Disease Image ${imgIndex + 1}`}
+                        className="w-32 h-32 object-cover rounded-md shadow-md cursor-pointer"
+                        onClick={() => {
+                          setSelectedImage(img);
+                          setIsImageModalOpen(true);
+                        }}
+                      />
+                    ))}
+                </div>
+                {log.diseaseImages.length > 4 && (
+                  <button
+                    className="mt-2 text-blue-500 font-semibold"
+                    onClick={() => setShowAllImages(!showAllImages)}
+                  >
+                    {showAllImages ? "Show Less" : "Show More"}
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+    </div>
+  );
+};
 const PlantTable = () => {
   const [expandedRows, setExpandedRows] = useState([]);
   const [page, setPage] = useState(1);
@@ -64,12 +212,12 @@ const PlantTable = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setSelectedDetection(null);
+    setSelectedPlant(null);
   };
 
   const handleModalOpenForEdit = (data) => {
     setModalMode("edit");
-    setSelectedDetection(data);
+    setSelectedPlant(data);
     setIsModalOpen(true);
   };
 
@@ -170,7 +318,7 @@ const PlantTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleModalOpenForEdit(row)}
-              className="text-white bg-blue-600 p-2 rounded-md"
+              className=" p-2 rounded-md"
             >
               <FaEdit size={16} />
             </button>
@@ -183,7 +331,7 @@ const PlantTable = () => {
           <div className="group relative">
             <button
               onClick={() => handleDeleteDetection(row._id)}
-              className="text-white bg-red-600 p-2 rounded-md"
+              className="0 p-2 rounded-md"
             >
               <FaTrash size={16} />
             </button>
@@ -206,7 +354,7 @@ const PlantTable = () => {
         <div className="flex flex-col overflow-auto">
           <h1 className="font-bold">All Plant Diseases Detection</h1>
 
-          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2">
+          <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2 modeDiv">
             {/* <label htmlFor="date">Created At</label>
         <input
           type="date"
@@ -246,21 +394,21 @@ const PlantTable = () => {
           onChangePage={setPage}
           onChangeRowsPerPage={setLimit}
           progressPending={loading}
-          //   expandableRows
-          //   expandableRowsComponent={ExpandedRowComponent}
-          //   expandableRowExpanded={(row) => expandedRows.includes(row._id)}
+          expandableRows
+          expandableRowsComponent={ExpandedRowComponent}
+          expandableRowExpanded={(row) => expandedRows.includes(row._id)}
         />
 
-        {/* {isDetectionModalOpen && (
-          <DetectionModal
+        {isModalOpen && (
+          <PlantModal
             mode={modalMode}
-            isOpen={isDetectionModalOpen}
+            isOpen={isModalOpen}
             onClose={handleModalClose}
-            onSaveData={fetchDetectionData}
-            data={selectedDetection}
+            onSaveData={fetchData}
+            data={selectedPlant}
             refreshTable={refreshTable}
           />
-        )} */}
+        )}
       </div>
     </>
   );

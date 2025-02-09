@@ -18,12 +18,12 @@ const PlantWithTimestamps = mongoose.models.Plant || mongoose.model("Plant", pla
 const jsonFilePath = path.join(__dirname, "../json/plant.json");
 
 // Connect to MongoDB using the URI from the .env file
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 45000,
-}).then(() => {
+const mongoURI = process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/luntian";
+mongoose.connect(mongoURI, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+}).
+then(() => {
   console.log("MongoDB connected successfully!");
 
   // Read the JSON data

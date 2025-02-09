@@ -181,13 +181,13 @@ const Admin = () => {
         <div className="flex space-x-2">
           <button
             onClick={() => handleModalOpenForEdit(row)}
-            className="text-white bg-blue-600 p-2 rounded-md"
+            className=" p-2 rounded-md"
           >
             <FaEdit size={16} />
           </button>
           <button
             onClick={() => handleDelete(row._id)}
-            className="text-white bg-red-600 p-2 rounded-md"
+            className=" p-2 rounded-md"
           >
             <FaTrash size={16} />
           </button>
@@ -195,7 +195,7 @@ const Admin = () => {
           {row.lockoutUntil && (
             <button
               onClick={() => handleUnlock(row._id)}
-              className="text-white bg-yellow-600 p-2 rounded-md"
+              className=" p-2 rounded-md"
             >
               <FaUnlock size={16} />
             </button>
@@ -207,9 +207,8 @@ const Admin = () => {
 
   return (
     <>
-      <Sidebar />
       <div className="p-4">
-        <div className="flex flex-col sm:flex-row items-center mt-12 mx-4 sm:justify-between space-y-4 sm:space-y-0">
+        <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2 modeDiv">
           <button
             onClick={handleModalOpenForAdd}
             className="bg-green-600 text-white rounded-md px-6 py-2 text-sm hover:scale-105 transition transform duration-300 flex items-center"
@@ -223,7 +222,7 @@ const Admin = () => {
               placeholder="Search users..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="border p-2 rounded-md"
+              className="border p-2 rounded-md "
             />
             <button
               onClick={handleExportClick}
@@ -233,24 +232,21 @@ const Admin = () => {
             </button>
           </div>
         </div>
-
-        <div className="overflow-x-auto m-4 scrollable-table-container overflow-y-auto truncate">
-          <DataTable
-            columns={columns}
-            data={users}
-            pagination
-            paginationServer
-            paginationPerPage={limit}
-            paginationTotalRows={totalItems}
-            onChangePage={(page) => setPage(page)}
-            onChangeRowsPerPage={(newLimit) => {
-              setLimit(newLimit);
-              setPage(1);
-            }}
-            className="min-w-full bg-white border border-gray-200"
-            progressPending={loading}
-          />
-        </div>
+        <DataTable
+          columns={columns}
+          data={users}
+          pagination
+          paginationServer
+          paginationPerPage={limit}
+          paginationTotalRows={totalItems}
+          onChangePage={(page) => setPage(page)}
+          onChangeRowsPerPage={(newLimit) => {
+            setLimit(newLimit);
+            setPage(1);
+          }}
+          className="min-w-full border "
+          progressPending={loading}
+        />
 
         <UserModal
           isOpen={isModalOpen}
