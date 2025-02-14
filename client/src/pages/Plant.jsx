@@ -1,5 +1,5 @@
 import React from "react";
-import PlantTable from "../components/plantTable";
+import PlantTable from "../components/PlantTable";
 
 const Plant = () => {
   return (
