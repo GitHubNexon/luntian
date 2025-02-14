@@ -1,5 +1,6 @@
 require("dotenv").config();
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const User = require("../models/userModel"); // Adjust this path based on your folder structure
