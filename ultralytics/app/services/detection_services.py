@@ -116,7 +116,13 @@ latest_detections = []
 def detect_from_live():
     """Runs live object detection and updates frames."""
     global live_detection_active, latest_frame, latest_detections
+    # Open the webcam
+    # Try opening /dev/video0 first
     cap = cv2.VideoCapture(0)
+
+    # If /dev/video0 fails, try /dev/video1
+    if not cap.isOpened():
+      cap = cv2.VideoCapture(1)
 
     while live_detection_active:
         ret, frame = cap.read()

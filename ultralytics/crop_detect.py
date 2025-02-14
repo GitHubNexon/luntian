@@ -30,7 +30,12 @@ def get_incremental_filename(base_path, base_name, extension):
 
 def detect_from_webcam():
     # Open the webcam
+    # Try opening /dev/video0 first
     cap = cv2.VideoCapture(0)
+
+    # If /dev/video0 fails, try /dev/video1
+    if not cap.isOpened():
+      cap = cv2.VideoCapture(1)
     if not cap.isOpened():
         print("Error: Could not access the camera.")
         sys.exit()
