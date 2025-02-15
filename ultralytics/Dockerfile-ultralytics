@@ -1,0 +1,15 @@
+# Use Python image
+FROM python:3.10
+
+WORKDIR /app
+
+# Copy and install dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the app
+COPY . .
+
+# Expose the port and start the Python app
+EXPOSE 5000
+CMD ["python", "/app/app.py"]
