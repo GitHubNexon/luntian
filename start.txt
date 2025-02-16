@@ -1,0 +1,17 @@
+Convert the Script to an Executable
+Use PyInstaller to make it a standalone .exe for Windows or a binary for Linux.
+
+pip install pyinstaller
+
+windows --
+
+pyinstaller --onefile --windowed run.py
+
+linux -- 
+
+pyinstaller --onefile --console run.py
+
+
+On Windows: Double-click run_luntian.exe
+
+On Linux: Run ./run_luntian
