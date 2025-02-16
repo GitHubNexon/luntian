@@ -117,8 +117,8 @@ const LiveDetection = () => {
             disabled={!isStreaming}
             className={`flex items-center gap-2 px-4 py-2 text-white font-medium rounded-lg transition-all duration-300 ${
               !isStreaming
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
+                ? " cursor-not-allowed"
+                : "bg-green-300 hover:bg-green-200"
             }`}
           >
             <FaCamera size={20} /> Capture
