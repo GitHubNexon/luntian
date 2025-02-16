@@ -70,7 +70,7 @@ function Layout({ children }) {
         <div className="flex-1 overflow-y-scroll  p-2">
           <div className="bg-transparent rounded">{children}</div>
           <span className="self-end text-end m-[10px] block text-[0.6em] text-gray-400">
-            v 1.0 09/26/2024
+            v 1.0 02/16/2024
           </span>
         </div>
       </div>

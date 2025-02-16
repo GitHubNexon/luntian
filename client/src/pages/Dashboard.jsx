@@ -3,7 +3,7 @@ import LiveDetection from '../components/LiveDetection'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard
+    <div className='w-full'>
       <LiveDetection />
     </div>
   )
