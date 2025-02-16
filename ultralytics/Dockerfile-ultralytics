@@ -1,0 +1,29 @@
+# Use Python image
+FROM python:3.10
+
+# Install useful tools (nano, curl, vim, and video capture libraries)
+RUN apt-get update && apt-get install -y \
+  nano \
+  curl \
+  vim \
+  v4l-utils \ 
+  libv4l-dev \                
+  libgl1-mesa-glx \           
+  libsm6 \                     
+  libxext6 \                   
+  libxrender1 \                
+  && rm -rf /var/lib/apt/lists/*  # Clean up after installation
+
+# Set working directory
+WORKDIR /app
+
+# Copy and install Python dependencies
+COPY requirements.txt ./ 
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the app into the container
+COPY . .
+
+# Expose the port and start the Python app
+EXPOSE 5000
+CMD ["python", "app/app.py"]

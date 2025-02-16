@@ -1,0 +1,87 @@
+
+To build and run your whole project --
+
+docker-compose down --volumes --remove-orphans
+docker-compose up --build
+
+
+If you want to stop the services -- 
+
+docker-compose down
+
+
+Deploying on Raspberry Pi
+
+Install Docker and Docker Compose on the Raspberry Pi:
+
+sudo apt update
+sudo apt install docker.io -y
+sudo apt install docker-compose -y
+
+git clone https://github.com/your-repo.git
+cd your-project
+
+docker-compose up --build
+
+
+This script will drop the old database and restore the new one after every pull:
+
+restore-mongo.sh file 
+
+#!/bin/bash
+
+# MongoDB connection info
+MONGO_URI=mongodb://mongo:27017  # Use 'mongo' because that's the service name in docker-compose
+DB_NAME=luntian
+DUMP_PATH=/mongodump/luntian
+
+# Wait for MongoDB to start up (a brief delay to ensure MongoDB is ready)
+echo "Waiting for MongoDB to start..."
+sleep 10
+
+# Drop the existing database
+echo "Dropping the existing database: $DB_NAME"
+docker exec -it mongodb mongo $DB_NAME --eval "db.dropDatabase()"
+
+# Restore the new dump
+echo "Restoring MongoDB dump from: $DUMP_PATH"
+docker exec -it mongodb mongorestore --uri=$MONGO_URI --drop --dir=$DUMP_PATH
+
+echo "Database restore complete."
+
+chmod +x restore-mongo.sh
+
+run -- ./restore-mongo.sh
+
+to open a file 
+
+to add .env
+
+
+docker exec -it <container_name_or_id> bash
+
+nano .env
+
+MONGODB_URI=mongodb://mongo:27017/luntian
+SALT_ROUNDS=10
+SECRET_KEY=LUNTIAN_2025
+TOKEN_EXPIRATION=30d
+
+
+docker exec -it mongodb mongosh
+
+docker exec -it mongodb bash
+ls -lah /mongodump
+chown -R mongodb:mongodb /mongodump/luntian
+chmod -R 755 /mongodump/luntian
+
+mongorestore --uri="mongodb://localhost:27017"  --dir="/mongodump/luntian"
+
+
+rm -rf luntian
+
+
+docker run -d --privileged --device=/dev/video0 luntian-ultralytics-1
+
+
+

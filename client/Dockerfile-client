@@ -1,0 +1,27 @@
+# Use Node.js image
+FROM node:20
+
+
+# Install useful tools (nano, curl, vim)
+RUN apt-get update && apt-get install -y \
+  nano \
+  curl \
+  vim \
+  && rm -rf /var/lib/apt/lists/*  # Clean up after installation
+
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Build the app (optional if needed)
+RUN npm run build
+
+# Expose the port and start the dev server
+EXPOSE 5173
+CMD ["npm", "run", "dev"]

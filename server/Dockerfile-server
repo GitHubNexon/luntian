@@ -1,0 +1,23 @@
+FROM node:20
+
+
+# Install useful tools (nano, curl, vim)
+RUN apt-get update && apt-get install -y \
+  nano \
+  curl \
+  vim \
+  && rm -rf /var/lib/apt/lists/*  # Clean up after installation
+
+
+WORKDIR /server
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install --legacy-peer-deps
+
+# Copy the rest of the app
+COPY . .
+
+# Expose the port and start the server
+EXPOSE 3000
+CMD ["npm", "run", "dev"]

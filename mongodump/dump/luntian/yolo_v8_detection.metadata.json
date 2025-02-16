@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"afe6dffb6ffe4683a7d1d8357223b682","collectionName":"yolo_v8_detection","type":"collection"}

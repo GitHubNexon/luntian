@@ -1,0 +1,64 @@
+
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile-client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+    command: ["sh", "-c", "npm install && npm run dev"]
+    networks:
+      - default
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ultralytics
+      - mongo
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    command: ["sh", "-c", "sleep 10 && npm run dev"]
+    networks:
+      - default
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/luntian 
+
+  ultralytics:
+    build:
+      context: ./ultralytics
+      dockerfile: Dockerfile-ultralytics
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ultralytics:/app
+    networks:
+      - default
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/luntian 
+    runtime: nvidia  # Optional, if you're using GPU, you can add this runtime flag for NVIDIA GPUs
+    privileged: true
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodump:/mongodump  # Bind MongoDB dump folder
+    command: ["mongod", "--bind_ip_all"]  # Bind to all interfaces
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
