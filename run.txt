@@ -1,6 +1,7 @@
 
 To build and run your whole project --
 
+docker-compose down --volumes --remove-orphans
 docker-compose up --build
 
 
@@ -51,3 +52,36 @@ echo "Database restore complete."
 chmod +x restore-mongo.sh
 
 run -- ./restore-mongo.sh
+
+to open a file 
+
+to add .env
+
+
+docker exec -it <container_name_or_id> bash
+
+nano .env
+
+MONGODB_URI=mongodb://mongo:27017/luntian
+SALT_ROUNDS=10
+SECRET_KEY=LUNTIAN_2025
+TOKEN_EXPIRATION=30d
+
+
+docker exec -it mongodb mongosh
+
+docker exec -it mongodb bash
+ls -lah /mongodump
+chown -R mongodb:mongodb /mongodump/luntian
+chmod -R 755 /mongodump/luntian
+
+mongorestore --uri="mongodb://localhost:27017"  --dir="/mongodump/luntian"
+
+
+rm -rf luntian
+
+
+docker run -d --privileged --device=/dev/video0 luntian-ultralytics-1
+
+
+

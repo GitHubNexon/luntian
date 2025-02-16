@@ -1,5 +1,14 @@
 FROM node:20
 
+
+# Install useful tools (nano, curl, vim)
+RUN apt-get update && apt-get install -y \
+  nano \
+  curl \
+  vim \
+  && rm -rf /var/lib/apt/lists/*  # Clean up after installation
+
+
 WORKDIR /server
 
 # Copy package files and install dependencies
