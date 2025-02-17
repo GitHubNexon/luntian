@@ -233,7 +233,11 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                       >
                         <img
                           // src={`data:image/jpeg;base64,${image.data}`}
-                          src={image.data}
+                          src={
+                            formData.images[0].data.startsWith('data:image/jpeg;base64,')
+                              ? formData.images[0].data // Use base64 if it starts with that prefix
+                              : `data:image/jpeg;base64,${formData.images[0].data}` // Otherwise, assume it's a regular path or URL
+                          }
                           alt={`Uploaded ${index}`}
                           className="w-20 h-20 object-cover rounded-md"
                         />
@@ -271,7 +275,11 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
           >
             <img
               // src={`data:image/jpeg;base64,${formData.images[0].data}`} // Show the first image from the array
-              src={formData.images[0].data} // Show the first image from the array
+              src={
+                formData.images[0].data.startsWith('data:image/jpeg;base64,')
+                  ? formData.images[0].data // Use base64 if it starts with that prefix
+                  : `data:image/jpeg;base64,${formData.images[0].data}` // Otherwise, assume it's a regular path or URL
+              }
               alt="Expanded view"
               className="object-contain w-full h-full"
               style={{ maxWidth: "100vw", maxHeight: "100vh" }}
