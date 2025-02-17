@@ -1,0 +1,10 @@
+sudo ls -ld /tmp
+sudo rm -f /tmp/mongodb-27017.sock
+sudo systemctl restart mongod
+sudo journalctl -u mongod -n 50 --no-pager
+sudo systemctl status mongod
+
+db.dropDatabase();
+show dbs 
+use luntian
+show collection

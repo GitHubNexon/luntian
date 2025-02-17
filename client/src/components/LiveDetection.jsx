@@ -85,6 +85,7 @@ const LiveDetection = () => {
             src={`${detectionApi.getVideoFeed()}?t=${new Date().getTime()}`}
             alt="Live Object Detection Feed"
             className="w-full h-full border-2 border-black rounded-md"
+            crossOrigin="Anonymous"
           />
         ) : (
           <p className="text-gray-600">Click "Start" to Begin Detection</p>
