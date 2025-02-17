@@ -129,6 +129,42 @@ def detect_from_live():
         if not ret:
             print("Failed to capture frame")
             break
+        
+        fps = 20
+        frame_count = 0
+        target_fps = 20
+        frame_interval = int(fps / target_fps)
+
+        
+        start_time = time.time()
+
+        if frame_count % frame_interval == 0:
+            results = model(frame)
+            result = results[0]
+            frame = result.plot()
+            
+        frame_count += 1
+        
+        elapsed_time = time.time() - start_time
+        fps_display = 1.0 / elapsed_time  # FPS
+        ms_display = elapsed_time * 1000  # MS
+
+
+        # Get the frame width and height
+        frame_height, frame_width = frame.shape[:2]
+
+        
+        text_position_fps = (frame_width - 200, 30)
+        text_position_ms = (frame_width - 200, 70)
+
+        # Display FPS and MS on the frame
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.7  
+        color = (0, 255, 0)  
+        thickness = 2  
+        # Draw FPS and MS on the frame
+        cv2.putText(frame, f"FPS: {fps_display:.2f}", text_position_fps, font, font_scale, color, thickness, cv2.LINE_AA)
+        cv2.putText(frame, f"MS: {ms_display:.2f}ms", text_position_ms, font, font_scale, color, thickness, cv2.LINE_AA)
 
         # Perform detection on the frame
         results = model(frame)
