@@ -53,7 +53,7 @@
 
 .input-field label {
   position: absolute;
-  color: #8d8d8d;
+  color: #2d5448;
   pointer-events: none;
   background-color: transparent;
   left: 15px;
@@ -65,7 +65,7 @@
   padding: 10px 15px;
   font-size: 1rem;
   border-radius: 8px;
-  border: solid 1px #8d8d8d;
+  border: solid 1px #2d5448;
   background-color: transparent;
   letter-spacing: 1px;
   width: 100%;
@@ -74,7 +74,7 @@
 .input-field input:focus,
 .input-field input:valid {
   outline: none;
-  border: solid 1px #0034de;
+  border: solid 1px #2d5448;
 }
 
 .input-field input:focus ~ label,
@@ -83,7 +83,7 @@
   background-color: #fff;
   background-color: transparent;
   padding: 0px 5px;
-  color: #0034de;
+  color: #2d5448;
   font-weight: bold;
   letter-spacing: 1px;
   border: none;

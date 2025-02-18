@@ -11,15 +11,15 @@ import { useAuth } from "../context/AuthContext";
 import Mode from "../components/Mode";
 
 const Header = () => {
-  const { expandSidebar, setExpandSidebar } = useContext(MiscContext);
+  // const { expandSidebar, setExpandSidebar } = useContext(MiscContext);
   const [isProfileHoverVisible, setProfileHoverVisible] = useState(false);
   const { profileImage } = useContext(UserContext);
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-  function toggleSidebar() {
-    setExpandSidebar(!expandSidebar);
-  }
+  // function toggleSidebar() {
+  //   setExpandSidebar(!expandSidebar);
+  // }
 
   const toggleProfileHover = () => {
     setProfileHoverVisible((prev) => !prev);
@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <div className="p-2 flex justify-between items-center">
-      <div>
+      {/* <div>
         <button className="text-[1.7em] md:hidden" onClick={toggleSidebar}>
           <MdOutlineMenuBook
             className={`transition duration-300 rotate-${
@@ -44,7 +44,7 @@ const Header = () => {
             }`}
           />
         </button>
-      </div>
+      </div> */}
       <div className="flex-1 flex justify-center max-md:hidden">
         <TabBar />
       </div>
