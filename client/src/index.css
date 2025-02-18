@@ -34,23 +34,23 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
- [data-theme="light"] .modeDiv{
-  background-color: var(--background-color); 
-  color: var(--text-color); 
-  transition: background-color 0.5s ease, color 0.5s ease; 
-}
-
-[data-theme="dark"] .modeDiv {
-  background-color: var(--secondary-color); 
-  color: var(--text-color); 
+[data-theme="light"] .modeDiv {
+  background-color: var(--background-color);
+  color: var(--text-color);
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+[data-theme="dark"] .modeDiv {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
 
 h2 {
   @apply text-xl md:text-4xl;
   font-family: "Poppins", sans-serif;
 }
+
 
 p {
   @apply text-xl tracking-tight leading-relaxed;
@@ -58,20 +58,19 @@ p {
 }
 
 button {
-  color: var(--text-color);
+  color: var(--primary-color);
   transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
 }
 
 [data-theme="light"] button:hover {
-  color: var(--background-color);
+  color: var(--primary-color);
   transform: scale(1.05);
 }
 
 [data-theme="dark"] button:hover {
-  color: var(--highlight-color);
+  color: var(--secondary-color);
   transform: scale(1.05);
 }
-
 
 a {
   color: var(--secondary-color);
@@ -102,8 +101,8 @@ li a {
 }
 
 li a:hover {
-  color: var(--primary-color); 
-} 
+  color: var(--primary-color);
+}
 
 .fade {
   transition: opacity 1s, visibility 1s !important;

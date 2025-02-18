@@ -96,9 +96,9 @@ const Login = () => {
                       id="password"
                       className="w-full p-2 border rounded"
                     />
-                    <button
+                    <span
                       type="button"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer "
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={
                         showPassword ? "Hide password" : "Show password"
@@ -109,7 +109,7 @@ const Login = () => {
                       ) : (
                         <AiFillEye className="text-gray-500" />
                       )}
-                    </button>
+                    </span>
                     <label
                       htmlFor="password"
                       className="absolute top-[-8px] left-2 text-gray-600"

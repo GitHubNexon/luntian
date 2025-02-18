@@ -33,8 +33,8 @@ const ExpandedRowComponent = ({ data }) => {
     if (data && data.plantDiseases) {
       const updatedFilteredLogs = data.plantDiseases.map((disease) => ({
         diseaseType: disease.diseaseType,
-        commonDisease: disease.commonDisease.join(", "),
-        // Ensure diseaseImage is always an array
+        diseaseName: disease.diseaseName,
+        diseaseDescription: disease.diseaseDescription,
         diseaseImages: disease.diseaseImage ? [disease.diseaseImage] : [],
       }));
       setFilteredDiseaseLogs(updatedFilteredLogs);
@@ -56,117 +56,120 @@ const ExpandedRowComponent = ({ data }) => {
         <img
           src={imageBase64}
           alt="Plant"
-          className="object-cover w-full h-full rounded-lg shadow-md"
+          className="object-cover w-full h-full rounded-lg shadow-md hover:scale-105 transform transition-all cursor-pointer"
         />
       </div>
     );
   };
 
   return (
-    <div className=" mx-auto p-10 bg-white shadow-lg rounded-lg">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Image Section */}
-        <div className="md:col-span-1 flex justify-center">
+    <div className="mx-auto p-10 shadow-lg rounded-lg ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Image and Plant Details Section */}
+        <div className="md:col-span-1 flex flex-col items-center space-y-4 ">
           {renderImages(data.plantDetails.plantImage)}
-        </div>
 
-        {/* Details Section */}
-        <div className="md:col-span-2 space-y-4">
-          {isImageModalOpen && selectedImage && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-              onClick={() => setIsImageModalOpen(false)}
-            >
-              <div
-                className="relative bg-white p-4 rounded-lg shadow-lg"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={selectedImage}
-                  alt="Expanded view"
-                  className="object-contain w-full h-full"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Plant Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-100 p-4 rounded-lg">
+          <div className="space-y-4 bg-gray-100 p-4 rounded-lg w-full ">
             <div>
               <span className="font-bold text-lg">Common Name:</span>
               <span className="text-gray-700">
-                {" "}
                 {renderData(data.plantDetails.commonName)}
               </span>
             </div>
             <div>
               <span className="font-bold text-lg">Scientific Name:</span>
               <span className="text-gray-700">
-                {" "}
                 {renderData(data.plantDetails.scientificName)}
               </span>
             </div>
             <div>
               <span className="font-bold text-lg">Family:</span>
               <span className="text-gray-700">
-                {" "}
                 {renderData(data.plantDetails.family)}
               </span>
             </div>
             <div>
               <span className="font-bold text-lg">Growth Stage:</span>
               <span className="text-gray-700">
-                {" "}
                 {renderData(data.plantDetails.growthStage)}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-lg">Trivia:</span>
+              <span className="text-gray-700">
+                {renderData(data.plantDetails.trivia)}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-lg">Description:</span>
+              <span className="text-gray-700">
+                {renderData(data.plantDetails.description)}
               </span>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Disease Logs */}
-        <div className="mt-8 p-6 bg-gray-50 rounded-lg shadow">
-          <span className="font-bold text-lg block mb-4">Plant Diseases:</span>
-          <div className="space-y-4">
-            {filteredDiseaseLogs.map((log, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                <span className="text-gray-700 font-medium">
-                  {log.commonDisease} ({log.diseaseType})
-                </span>
-                <div
-                  className={`grid ${
-                    log.diseaseImages.length > 4
-                      ? "grid-cols-2"
-                      : "flex flex-wrap"
-                  } gap-2 mt-2`}
-                >
-                  {log.diseaseImages
-                    .slice(0, showAllImages ? log.diseaseImages.length : 4)
-                    .map((img, imgIndex) => (
-                      <img
-                        key={imgIndex}
-                        src={img}
-                        alt={`Disease Image ${imgIndex + 1}`}
-                        className="w-32 h-32 object-cover rounded-md shadow-md cursor-pointer"
-                        onClick={() => {
-                          setSelectedImage(img);
-                          setIsImageModalOpen(true);
-                        }}
-                      />
-                    ))}
-                </div>
+        {/* Disease Logs Section */}
+        <div className="md:col-span-1  p-6 rounded-lg shadow-lg space-y-6">
+          <span className="font-bold text-xl text-gray-800 mb-4">
+            Plant Diseases
+          </span>
+          {filteredDiseaseLogs.map((log, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 space-x-2"
+            >
+              <div>
+                {log.diseaseImages
+                  .slice(0, showAllImages ? log.diseaseImages.length : 4)
+                  .map((img, imgIndex) => (
+                    <img
+                      key={imgIndex}
+                      src={img}
+                      alt={`Disease Image ${imgIndex + 1}`}
+                      className="w-full h-full object-cover rounded-md shadow-md hover:scale-105 transform transition-all cursor-pointer"
+                      onClick={() => {
+                        setSelectedImage(img);
+                        setIsImageModalOpen(true);
+                      }}
+                    />
+                  ))}
+              </div>
+              <div className="flex flex-col justify-between">
+                <p className=" text-sm leading-relaxed text-center">
+                  {log.diseaseDescription}
+                </p>
                 {log.diseaseImages.length > 4 && (
                   <button
-                    className="mt-2 text-blue-500 font-semibold"
+                    className="mt-4 font-semibold hover:underline"
                     onClick={() => setShowAllImages(!showAllImages)}
                   >
                     {showAllImages ? "Show Less" : "Show More"}
                   </button>
                 )}
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {isImageModalOpen && selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setIsImageModalOpen(false)}
+        >
+          <div
+            className="relative bg-white p-4 rounded-lg shadow-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Expanded view"
+              className="object-fill w-[50vw] h-[50vh] "
+            />
           </div>
         </div>
+      )}
     </div>
   );
 };
@@ -352,7 +355,7 @@ const PlantTable = () => {
     <>
       <div className="mx-auto p-8">
         <div className="flex flex-col overflow-auto">
-          <h1 className="font-bold">All Plant Diseases Detection</h1>
+          <h1 className="font-bold">Plant Library</h1>
 
           <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2 modeDiv">
             {/* <label htmlFor="date">Created At</label>

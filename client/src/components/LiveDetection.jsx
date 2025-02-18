@@ -88,7 +88,7 @@ const LiveDetection = () => {
             crossOrigin="Anonymous"
           />
         ) : (
-          <p className="text-gray-600">Click "Start" to Begin Detection</p>
+          <p>Click "Start" to Begin Detection</p>
         )}
         <div className="flex gap-4 mt-4">
           <button

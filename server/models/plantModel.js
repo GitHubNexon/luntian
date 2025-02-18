@@ -16,7 +16,8 @@ const plantDetailsSchema = new mongoose.Schema({
 
 const plantDiseasesSchema = new mongoose.Schema({
   diseaseImage: { type: String, required: false },
-  commonDisease: { type: [String], required: false },
+  diseaseName: { type: String, required: false },
+  diseaseDescription: { type: String, required: false },
   diseaseType: { type: String, required: false },
 });
 
