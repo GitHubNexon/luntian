@@ -62,7 +62,7 @@ const ReportNavigation = () => {
         >
           <button onClick={() => navigate("/Plant")}>
             <FaPlantWilt className="inline mr-2" />
-            Plant
+            Plants
           </button>
         </li>
 

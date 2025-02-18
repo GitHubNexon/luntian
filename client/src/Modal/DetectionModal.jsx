@@ -161,7 +161,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
           <form className="space-y-4">
             <div className="flex flex-col items-stretch justify-center text-[0.7em] space-y-2">
               <div className="flex flex-col">
-                <label htmlFor="details" className="text-gray-700">
+                <label htmlFor="details" >
                   Details
                 </label>
                 <input
@@ -174,7 +174,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="description" className="text-gray-700">
+                <label htmlFor="description" >
                   Description
                 </label>
                 <textarea
@@ -211,7 +211,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               <div className="flex flex-col">
                 {mode !== "edit" && (
                   <>
-                    <label htmlFor="images" className="text-gray-700">
+                    <label htmlFor="images" >
                       Upload Image
                     </label>
                     <input

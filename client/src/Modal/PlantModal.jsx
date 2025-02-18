@@ -7,6 +7,7 @@ import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 import { format } from "timeago.js";
 
 const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
+  const [selectedDiseaseImage, setSelectedDiseaseImage] = useState("");
   const [formData, setFormData] = useState({
     plantDetails: {
       commonName: "",
@@ -24,39 +25,20 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
     plantDiseases: [
       {
         diseaseImage: "",
-        commonDisease: [],
+        diseaseName: "",
+        diseaseDescription: "",
         diseaseType: "",
       },
     ],
   });
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  const [newDescription, setNewDescription] = useState("");
-
-  const handleAddDescription = () => {
-    if (newDescription.trim()) {
-      setFormData((prevData) => ({
-        ...prevData,
-        description: [...prevData.description, newDescription.trim()],
-      }));
-      setNewDescription(""); // Reset the input after adding
-    }
-  };
-
-  const handleRemoveDescription = (indexToRemove) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      description: prevData.description.filter(
-        (_, index) => index !== indexToRemove
-      ),
-    }));
-  };
 
   if (!isOpen) return null;
 
   useEffect(() => {
     if (mode === "edit" && data) {
-      console.log("Editing data:", data); // Debugging log
+      console.log("Editing data:", data);
       setFormData({ ...data });
     }
   }, [mode, data]);
@@ -107,7 +89,12 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
       ...prevData,
       plantDiseases: [
         ...prevData.plantDiseases,
-        { commonDisease: "", diseaseType: "", diseaseImage: "" },
+        {
+          diseaseName: "",
+          diseaseDescription: "",
+          diseaseType: "",
+          diseaseImage: "",
+        },
       ],
     }));
   };
@@ -209,9 +196,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
             <div className="flex flex-col items-stretch justify-center text-[0.7em] space-y-2">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                 <div className="flex flex-col">
-                  <label htmlFor="commonName" className="text-gray-700">
-                    Plant Name
-                  </label>
+                  <label htmlFor="commonName">Plant Name</label>
                   <input
                     type="text"
                     id="commonName"
@@ -222,9 +207,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="scientificName" className="text-gray-700">
-                    Scientific Name
-                  </label>
+                  <label htmlFor="scientificName">Scientific Name</label>
                   <input
                     type="text"
                     id="scientificName"
@@ -235,9 +218,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="family" className="text-gray-700">
-                    Family
-                  </label>
+                  <label htmlFor="family">Family</label>
                   <input
                     type="text"
                     id="family"
@@ -248,9 +229,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="genus" className="text-gray-700">
-                    Genus
-                  </label>
+                  <label htmlFor="genus">Genus</label>
                   <input
                     type="text"
                     id="genus"
@@ -263,9 +242,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                 <div className="flex flex-col">
-                  <label htmlFor="species" className="text-gray-700">
-                    Species
-                  </label>
+                  <label htmlFor="species">Species</label>
                   <input
                     type="text"
                     id="species"
@@ -276,9 +253,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="variety" className="text-gray-700">
-                    Variety (seperate by Comma)
-                  </label>
+                  <label htmlFor="variety">Variety (seperate by Comma)</label>
                   <input
                     type="text"
                     id="variety"
@@ -289,9 +264,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="age" className="text-gray-700">
-                    Age
-                  </label>
+                  <label htmlFor="age">Age</label>
                   <input
                     type="number"
                     id="age"
@@ -302,9 +275,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="growthStage" className="text-gray-700">
-                    Growth Stage
-                  </label>
+                  <label htmlFor="growthStage">Growth Stage</label>
                   <input
                     type="text"
                     id="growthStage"
@@ -317,9 +288,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="trivia" className="text-gray-700">
-                  Trivia
-                </label>
+                <label htmlFor="trivia">Trivia</label>
                 <textarea
                   type="text"
                   id="trivia"
@@ -330,9 +299,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="description" className="text-gray-700">
-                  Description
-                </label>
+                <label htmlFor="description">Description</label>
                 <textarea
                   type="text"
                   id="description"
@@ -346,9 +313,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               {/* plants */}
               <div className="flex flex-col">
                 <>
-                  <label htmlFor="images" className="text-gray-700">
-                    Upload Image for Plant
-                  </label>
+                  <label htmlFor="images">Upload Image for Plant</label>
                   <input
                     type="file"
                     id="images"
@@ -361,11 +326,16 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                     <h3>Uploaded Image:</h3>
                     <div
                       className="mt-2 cursor-pointer"
-                      onClick={openImageModal}
+                      // onClick={openImageModal}
+                      onClick={() => {
+                        setSelectedDiseaseImage(
+                          formData.plantDetails.plantImage
+                        );
+                        setIsImageModalOpen(true);
+                      }}
                     >
                       <img
                         src={formData.plantDetails.plantImage}
-                        // src={`data:image/jpeg;base64,${formData.plantDetails.plantImage}`}
                         alt="Uploaded Plant"
                         className="w-20 h-20 object-cover rounded-md"
                       />
@@ -381,11 +351,19 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                   <div key={index} className="border p-2 rounded-md mt-2">
                     <input
                       type="text"
-                      name="commonDisease"
-                      value={disease.commonDisease}
+                      name="diseaseName"
+                      value={disease.diseaseName}
                       onChange={(e) => handleDiseaseChange(index, e)}
-                      placeholder="Common Disease"
+                      placeholder="Disease Name"
                       className="border border-gray-300 p-2 rounded-md bg-gray-100 text-gray-500 w-full mt-2"
+                    />
+                    <textarea
+                      type="text"
+                      name="diseaseDescription"
+                      value={disease.diseaseDescription}
+                      onChange={(e) => handleDiseaseChange(index, e)}
+                      placeholder="Disease Description"
+                      className="border border-gray-300 p-2 rounded-md bg-gray-100 text-gray-500 resize-none h-[100px] w-full mt-2"
                     />
                     <input
                       type="text"
@@ -400,19 +378,16 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                       onChange={(e) => handleDiseaseImageUpload(index, e)}
                       className="border p-2 rounded-md w-full mt-2"
                     />
-                    {/* {disease.diseaseImage && (
-                      <img
-                        src={disease.diseaseImage}
-                        alt="Disease"
-                        className="w-20 h-20 object-cover mt-2 rounded-md"
-                      />
-                    )} */}
                     {disease.diseaseImage && (
                       <div className="mt-2">
-                        <h3>Uploaded Image:</h3>
+                        <h3>Uploaded Image shits:</h3>
                         <div
                           className="mt-2 cursor-pointer"
-                          onClick={() => openImageModal(disease.diseaseImage)}
+                          // onClick={() => openImageModal(disease.diseaseImage)}
+                          onClick={() => {
+                            setSelectedDiseaseImage(disease.diseaseImage);
+                            setIsImageModalOpen(true);
+                          }}
                         >
                           <img
                             src={disease.diseaseImage}
@@ -426,7 +401,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveDisease(index)}
-                      className="bg-red-500 text-white p-2 rounded-md mt-2"
+                      className=" text-white py-2 px-2 rounded-md "
                     >
                       Remove
                     </button>
@@ -435,7 +410,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 <button
                   type="button"
                   onClick={handleAddDisease}
-                  className="bg-blue-500 text-white p-2 rounded-md mt-2"
+                  className=" text-white py-2 px-2 rounded-md "
                 >
                   Add Disease
                 </button>
@@ -454,8 +429,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
         </div>
       </div>
 
-      {/* Image Modal */}
-      {isImageModalOpen && formData.plantDetails.plantImage && (
+      {isImageModalOpen && selectedDiseaseImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={closeImageModal}
@@ -465,11 +439,9 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={formData.plantDetails.plantImage}
-              //   src={`data:image/jpeg;base64,${formData.plantDetails.plantImage}`}
+              src={selectedDiseaseImage}
               alt="Expanded view"
-              className="object-contain w-full h-full"
-              style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+              className="object-fill w-[50vw] h-[50vh]"
             />
           </div>
         </div>
