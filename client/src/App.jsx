@@ -15,6 +15,7 @@ import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import Detection from "./pages/Detection";
 import Plant from "./pages/Plant";
+import Monitoring from "./pages/Monitoring";
 
 function App() {
   useEffect(() => {
@@ -48,6 +49,14 @@ function App() {
                 element={
                   <Layout>
                     <Plant />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/Monitoring"
+                element={
+                  <Layout>
+                    <Monitoring />
                   </Layout>
                 }
               />

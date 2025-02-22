@@ -13,6 +13,7 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { RiAdminFill } from "react-icons/ri";
+import { MdOutlineMonitorHeart } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 
 const ReportNavigation = () => {
@@ -40,6 +41,19 @@ const ReportNavigation = () => {
             Dashboard
           </button>
         </li>
+        <li
+          className={`py-1 px-4 border-b-[5px] whitespace-nowrap transition-all duration-300 ${
+            location.pathname === "/Monitoring"
+              ? "border-green-500"
+              : "border-transparent"
+          } hover:border-green-400 hover:text-green-500`}
+        >
+          <button onClick={() => navigate("/Monitoring")}>
+            <MdOutlineMonitorHeart className="inline mr-2" />
+            Monitoring
+          </button>
+        </li>
+
         <li
           className={`py-1 px-4 border-b-[5px] whitespace-nowrap transition-all duration-300 ${
             location.pathname === "/Detection"
