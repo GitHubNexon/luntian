@@ -135,7 +135,11 @@ const ExpandedRowComponent = ({ data }) => {
                     />
                   ))}
               </div>
+
               <div className="flex flex-col justify-between">
+                <span className="font-bold text-sm text-gray-800">
+                {log.diseaseName}
+                </span>
                 <p className=" text-sm leading-relaxed text-center">
                   {log.diseaseDescription}
                 </p>

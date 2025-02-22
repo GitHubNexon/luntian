@@ -140,7 +140,8 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
   return (
     <>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-        <div className="p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh] modeDiv">
+        <div className="p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh] bg-[#dff6d8]"  data-aos="zoom-in"
+        data-aos-duration="500">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">
               {mode === "edit" ? "Edit Detection" : "Add Detection"}
