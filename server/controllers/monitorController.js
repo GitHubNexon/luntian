@@ -1,7 +1,24 @@
 const Monitoring = require("../models/monitoringModel");
+const mongoose = require("mongoose");
 
 const createMonitoring = async (req, res) => {
   try {
+    const convertToObjectId = (obj) => {
+      for (let key in obj) {
+        if (key.endsWith("_id") && typeof obj[key] === "string") {
+          try {
+            obj[key] = new mongoose.Types.ObjectId(obj[key]);
+          } catch (err) {
+            return res.status(400).json({ error: `Invalid ObjectId format for ${key}` });
+          }
+        } else if (typeof obj[key] === "object" && obj[key] !== null) {
+          convertToObjectId(obj[key]);
+        }
+      }
+    };
+
+    convertToObjectId(req.body);
+
     const newMonitoring = await Monitoring.create(req.body);
     res.status(201).json({
       message: "Monitoring details added successfully",

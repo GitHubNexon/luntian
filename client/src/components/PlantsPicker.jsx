@@ -3,11 +3,13 @@ import Select from "react-select";
 import helperApi from "../api/helperApi";
 import { FaLeaf } from "react-icons/fa";
 
-const PlantsPicker = ({ onSelect }) => {
+const PlantsPicker = ({ onSelect, mode }) => {
   const [plants, setPlants] = useState([]);
   const [hoveredPlant, setHoveredPlant] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
   const [selectedImage, setSelectedImage] = useState(null); // Track the image to show in modal
+  
+  
 
   useEffect(() => {
     const fetchPlants = async () => {
@@ -79,8 +81,7 @@ const PlantsPicker = ({ onSelect }) => {
         placeholder="Select..." // Default placeholder
       />
 
-      {/* Hovered Plant Preview */}
-      {hoveredPlant && !isModalOpen && (
+      {/* {hoveredPlant && !isModalOpen && (
         <div className="absolute top-full left-0 mt-2 p-2 bg-white border shadow-lg rounded-lg w-48">
           <img
             src={hoveredPlant}
@@ -91,7 +92,6 @@ const PlantsPicker = ({ onSelect }) => {
         </div>
       )}
 
-      {/* Modal for Selected Plant */}
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -108,7 +108,7 @@ const PlantsPicker = ({ onSelect }) => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -85,8 +85,7 @@ const DetectionPicker = ({ onSelect }) => {
         placeholder="Select..." // Default placeholder
       />
 
-      {/* Modal inside hoveredDetection block */}
-      {hoveredDetection && !isModalOpen && (
+      {/* {hoveredDetection && !isModalOpen && (
         <div className="absolute top-full left-0 mt-2 p-2 bg-white border shadow-lg rounded-lg w-48">
           <img
             src={hoveredDetection}
@@ -94,10 +93,9 @@ const DetectionPicker = ({ onSelect }) => {
             className="w-full h-auto rounded-md"
           />
         </div>
-      )}
+      )} */}
 
-      {/* Modal */}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={closeModal}
@@ -113,7 +111,7 @@ const DetectionPicker = ({ onSelect }) => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

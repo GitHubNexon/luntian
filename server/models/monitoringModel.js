@@ -7,8 +7,10 @@ const StatusSchema = new mongoose.Schema({
 
 const monitorSchema = new mongoose.Schema(
   {
-    plantInfo: { type: mongoose.Schema.Types.Mixed },
+    plantInfo: { type: mongoose.Schema.Types.Mixed, _id: false},
     plantDiseaseInfo: { type: mongoose.Schema.Types.Mixed },
+    location: { type: String, required: false },
+    description: { type: String, required: false },
     Status: { type: StatusSchema, required: false },
   },
   {

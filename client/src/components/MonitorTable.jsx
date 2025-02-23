@@ -12,7 +12,12 @@ import {
   FaUndo,
   FaArchive,
 } from "react-icons/fa";
-import { MdDelete, MdArchive, MdCheckCircle } from "react-icons/md";
+import {
+  MdDelete,
+  MdArchive,
+  MdCheckCircle,
+  MdOutlineMonitorHeart,
+} from "react-icons/md";
 import { FaBookSkull } from "react-icons/fa6";
 import { RiBankFill } from "react-icons/ri";
 import { showToast } from "../utils/toastNotifications";
@@ -20,7 +25,7 @@ import showDialog from "../utils/showDialog";
 import MonitoringTableLogic from "../hooks/MonitoringTableLogic";
 import MonitorApi from "../api/MonitorApi";
 import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
-// import DepreciationModal from "../Pop-Up-Pages/DepreciationModal";
+import MonitoringModal from "../Modal/MonitoringModal";
 
 const MonitorTable = () => {
   const [page, setPage] = useState(1);
@@ -213,15 +218,21 @@ const MonitorTable = () => {
       },
       width: "120px",
     },
-    // {
-    //   name: "Equipment / Property Name",
-    //   selector: (row) => row.Name || "",
-    //   width: "300px",
-    // },
-    // {
-    //   name: "Property No",
-    //   selector: (row) => row.PropNo || "",
-    // },
+    {
+      name: "CommonName",
+      selector: (row) => row.plantInfo.plantDetails.commonName || "",
+      width: "200px",
+    },
+    {
+      name: "Disease Detected",
+      selector: (row) => row.plantDiseaseInfo.image_result[0].info || "",
+      width: "200px",
+    },
+    {
+      name: "location",
+      selector: (row) => row.location || "",
+      width: "400px",
+    },
 
     // {
     //   name: "Acquisition Date",
@@ -341,7 +352,7 @@ const MonitorTable = () => {
     <>
       <div className="mx-auto p-8">
         <div className="flex flex-col overflow-auto">
-          <FaBookSkull size={20} />
+          <MdOutlineMonitorHeart size={20} />
           <h1 className="font-bold">Monitoring</h1>
 
           <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-2 overflow-x-auto p-3 items-center justify-end space-x-2">
@@ -399,16 +410,16 @@ const MonitorTable = () => {
           onSort={(column) => toggleSortOrder(column.id)}
         />
 
-        {/* {isDepreciationModalOpen && (
-          <DepreciationModal
+        {isMonitoringModalOpen && (
+          <MonitoringModal
             mode={modalMode}
-            isOpen={isDepreciationModalOpen}
+            isOpen={isMonitoringModalOpen}
             onClose={handleModalClose}
-            onSaveDepreciation={fetchDepreciation}
-            depreciationData={selectedDepreciation}
+            onSaveData={fetchData}
+            data={selectedMonitoring}
             refreshTable={refreshTable}
           />
-        )} */}
+        )}
 
         {/* {isBankReconPreviewOpen && (
       <BankReconPreview
