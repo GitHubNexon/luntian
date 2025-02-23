@@ -39,6 +39,7 @@ const baseRoutes = require("./routes/baseRoutes");
 const detectRoutes = require("./routes/detectRoutes");
 const plantRoutes = require("./routes/plantRoutes");
 const helperRoutes = require("./routes/helperRoutes");
+const monitoringRoutes = require("./routes/monitoringRoutes");
 
 // const { createDefaultUser } = require("./controllers/authController");
 // const { initializeDefaults } = require("./controllers/baseController");
@@ -72,6 +73,7 @@ app.use("/api/base", baseRoutes);
 app.use("/api/detect", detectRoutes);
 app.use("/api/plants", plantRoutes);
 app.use("/api/helper", helperRoutes);
+app.use("/api/monitoring", monitoringRoutes);
 
 
 // Start the server with Socket.IO
