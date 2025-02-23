@@ -65,7 +65,7 @@ const MonitorTable = () => {
 
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
-    fetchDepreciation();
+    fetchData();
   };
 
   const handlePreviewClick = (monitoring) => {
@@ -145,7 +145,7 @@ const MonitorTable = () => {
 
         if (result) {
           showDialog.showMessage("Monitoring archive successfully", "success");
-          fetchDepreciation();
+          fetchData();
         }
       } catch (error) {
         console.error("Failed to archive Monitoring:", error);
