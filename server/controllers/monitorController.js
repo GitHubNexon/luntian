@@ -67,7 +67,7 @@ const getAllMonitorings = async (req, res) => {
       [sortBy]: sortOrder, // Sort by user-provided field and order
     };
     const totalItems = await Monitoring.countDocuments(query);
-    const depreciation = await Monitoring.find(query)
+    const MonitoringData = await Monitoring.find(query)
       .sort(sortCriteria)
       .skip((page - 1) * limit)
       .limit(limit);
@@ -76,7 +76,7 @@ const getAllMonitorings = async (req, res) => {
       totalItems,
       totalPages: Math.ceil(totalItems / limit),
       currentPage: page,
-      depreciation: depreciation,
+      monitoring: MonitoringData,
     });
   } catch (error) {
     console.error("Error fetching monitoring details:", error);
