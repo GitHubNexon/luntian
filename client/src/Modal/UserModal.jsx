@@ -174,7 +174,7 @@ const UserModal = ({ isOpen, onClose, mode, user, onSaveUser, refresh }) => {
       }`}
     >
       <div
-        className="p-6 rounded-lg relative w-[400px] max-w-full max-h-[90vh] overflow-y-auto modeDiv"
+        className="p-6 rounded-lg relative w-[400px] max-w-full max-h-[90vh] overflow-y-auto bg-[#dff6d8]"
         data-aos="zoom-in"
         data-aos-duration="500"
       >

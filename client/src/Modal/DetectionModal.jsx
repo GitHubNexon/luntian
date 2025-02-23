@@ -5,6 +5,7 @@ import { showToast } from "../utils/toastNotifications";
 import detectionApi from "../api/detectionApi";
 import { numberToCurrencyString, formatReadableDate } from "../helper/helper";
 import { format } from "timeago.js";
+import Compressor from "compressorjs";
 
 const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
   const [formData, setFormData] = useState({
@@ -75,22 +76,79 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
     return true;
   };
 
+  const MAX_IMAGE_SIZE = 2 * 1024 * 1024; //2MB
+
+  // const handleImageUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
+
+  //   if (file.size > MAX_IMAGE_SIZE) {
+  //     showToast(
+  //       "Image size exceeds 2MB. Please upload a smaller file.",
+  //       "error"
+  //     );
+  //     return;
+  //   }
+
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     const imageData = reader.result;
+  //     const currentDate = new Date().toISOString().split("T")[0];
+  //     const newImage = { data: imageData, date: currentDate };
+
+  //     setFormData((prevData) => {
+  //       if (prevData.images.length >= 5) {
+  //         showToast("You can upload up to 5 images only.", "warning");
+  //         return prevData;
+  //       }
+  //       return {
+  //         ...prevData,
+  //         images: [...prevData.images, newImage],
+  //       };
+  //     });
+  //   };
+
+  //   reader.readAsDataURL(file);
+  // };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const imageData = reader.result;
-      const currentDate = new Date().toISOString().split("T")[0];
-      const newImage = { data: imageData, date: currentDate };
+    // Compress the image using Compressor.js
+    new Compressor(file, {
+      quality: 0.6, // The quality of the compressed image (0 to 1)
+      maxWidth: 800, // Optional: set the max width of the image
+      maxHeight: 800, // Optional: set the max height of the image
+      success(result) {
+        // Convert the compressed image to base64
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const imageData = reader.result;
 
-      setFormData((prevData) => ({
-        ...prevData,
-        images: [newImage],
-      }));
-    };
-    reader.readAsDataURL(file);
+          const currentDate = new Date().toISOString().split("T")[0];
+          const newImage = { data: imageData, date: currentDate };
+
+          // Update the form data state
+          setFormData((prevData) => {
+            if (prevData.images.length >= 5) {
+              showToast("You can upload up to 5 images only.", "warning");
+              return prevData;
+            }
+            return {
+              ...prevData,
+              images: [...prevData.images, newImage],
+            };
+          });
+        };
+
+        reader.readAsDataURL(result); 
+      },
+      error(err) {
+        showToast("Error compressing the image.", "error");
+        console.error(err);
+      },
+    });
   };
 
   const handleSubmit = async () => {
@@ -140,7 +198,11 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
   return (
     <>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-        <div className="p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh] modeDiv">
+        <div
+          className="p-6 rounded-lg w-[500px] m-10 overflow-y-auto max-h-[90vh] bg-[#dff6d8]"
+          data-aos="zoom-in"
+          data-aos-duration="500"
+        >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">
               {mode === "edit" ? "Edit Detection" : "Add Detection"}
@@ -161,9 +223,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
           <form className="space-y-4">
             <div className="flex flex-col items-stretch justify-center text-[0.7em] space-y-2">
               <div className="flex flex-col">
-                <label htmlFor="details" >
-                  Details
-                </label>
+                <label htmlFor="details">Details</label>
                 <input
                   type="text"
                   id="details"
@@ -174,9 +234,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="description" >
-                  Description
-                </label>
+                <label htmlFor="description">Description</label>
                 <textarea
                   type="text"
                   id="description"
@@ -188,7 +246,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 <button
                   type="button"
                   onClick={handleAddDescription}
-                  className=" py-1 px-3 rounded-md mt-2 bg-[var(--primary-color)]"
+                  className=" py-1 px-3 rounded-md mt-2 bg-green-500 text-white"
                 >
                   Add Description
                 </button>
@@ -211,9 +269,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
               <div className="flex flex-col">
                 {mode !== "edit" && (
                   <>
-                    <label htmlFor="images" >
-                      Upload Image
-                    </label>
+                    <label htmlFor="images">Upload Image</label>
                     <input
                       type="file"
                       id="images"
@@ -234,7 +290,9 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                         <img
                           // src={`data:image/jpeg;base64,${image.data}`}
                           src={
-                            formData.images[0].data.startsWith('data:image/jpeg;base64,')
+                            formData.images[0].data.startsWith(
+                              "data:image/jpeg;base64,"
+                            )
                               ? formData.images[0].data // Use base64 if it starts with that prefix
                               : `data:image/jpeg;base64,${formData.images[0].data}` // Otherwise, assume it's a regular path or URL
                           }
@@ -276,7 +334,7 @@ const DetectionModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
             <img
               // src={`data:image/jpeg;base64,${formData.images[0].data}`} // Show the first image from the array
               src={
-                formData.images[0].data.startsWith('data:image/jpeg;base64,')
+                formData.images[0].data.startsWith("data:image/jpeg;base64,")
                   ? formData.images[0].data // Use base64 if it starts with that prefix
                   : `data:image/jpeg;base64,${formData.images[0].data}` // Otherwise, assume it's a regular path or URL
               }

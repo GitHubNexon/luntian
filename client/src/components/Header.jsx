@@ -8,7 +8,7 @@ import defaultImg from "../assets/Images/default-img.png";
 import TabBar from "../routes/TabBar";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
-import Mode from "../components/Mode";
+// import Mode from "../components/Mode";
 
 const Header = () => {
   // const { expandSidebar, setExpandSidebar } = useContext(MiscContext);
@@ -49,7 +49,7 @@ const Header = () => {
         <TabBar />
       </div>
 
-      <Mode />
+      {/* <Mode /> */}
       <button
         onClick={handleLogout}
         className="flex items-center p-2 rounded-md  transition-colors max-md:hidden ml-2"

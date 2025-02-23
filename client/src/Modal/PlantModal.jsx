@@ -174,7 +174,11 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
   return (
     <>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-        <div className="p-6 rounded-lg m-10 overflow-y-auto max-h-[90vh] modeDiv">
+        <div
+          className="p-6 rounded-lg m-10 overflow-y-auto max-h-[90vh]  bg-[#dff6d8]"
+          data-aos="zoom-in"
+          data-aos-duration="500"
+        >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">
               {mode === "edit" ? "Edit Plant" : "Add Plant"}
@@ -401,7 +405,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveDisease(index)}
-                      className=" text-white py-2 px-2 rounded-md "
+                      className=" text-white py-2 px-2 rounded-md bg-green-500 mt-2"
                     >
                       Remove
                     </button>
@@ -410,7 +414,7 @@ const PlantModal = ({ isOpen, onClose, onSaveData, data, mode }) => {
                 <button
                   type="button"
                   onClick={handleAddDisease}
-                  className=" text-white py-2 px-2 rounded-md "
+                  className=" text-white py-2 px-2 rounded-md bg-green-500"
                 >
                   Add Disease
                 </button>

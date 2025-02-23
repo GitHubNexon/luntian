@@ -119,7 +119,7 @@ const LiveDetection = () => {
             className={`flex items-center gap-2 px-4 py-2 text-white font-medium rounded-lg transition-all duration-300 ${
               !isStreaming
                 ? " cursor-not-allowed"
-                : "bg-green-300 hover:bg-green-200"
+                : "bg-green-500 hover:bg-green-200 text-gray-600"
             }`}
           >
             <FaCamera size={20} /> Capture
