@@ -1,0 +1,48 @@
+# 🚀 Install required libraries
+!pip install ultralytics roboflow zipfile36 --upgrade
+
+# ✅ Import necessary libraries
+import os
+import zipfile
+from roboflow import Roboflow
+from ultralytics import YOLO
+import torch
+
+# ✅ Check if GPU is available
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}")
+
+# 🔗 Connect to Roboflow & Download Dataset
+rf = Roboflow(api_key="6RQvKj2kNvy7f4t3M1f6")  # 🔥 Replace with your Roboflow API Key
+project = rf.workspace("githubnexon-dxwci").project("cropv2")  # 🔥 Replace with your workspace/project
+dataset = project.version(2).download("yolov8")  # 🔥 Replace with your dataset version
+
+# ✅ Print dataset path
+print("Dataset downloaded to:", dataset.location)
+
+# ✅ Define dataset path (Fixing issue)
+dataset_path = dataset.location
+
+# 🔥 Load YOLOv8 Model (Choose: yolov8n.pt, yolov8s.pt, yolov8m.pt)
+model = YOLO("yolov8n.pt")  # You can change this to yolov8s.pt or others
+
+# 🏋️‍♂️ Train the model
+model.train(data=f"{dataset_path}/data.yaml", epochs=50, imgsz=640, batch=16, device=device)
+
+# ✅ Model path after training
+model_dir = "/content/runs/detect/train/weights"
+best_model_path = f"{model_dir}/best.pt"
+
+# 🗜️ Zip the entire trained model directory
+zip_filename = "/content/yolov8_trained_model.zip"
+with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    for root, _, files in os.walk(model_dir):
+        for file in files:
+            file_path = os.path.join(root, file)
+            zipf.write(file_path, os.path.relpath(file_path, model_dir))
+
+print(f"✅ Model ZIP saved at: {zip_filename}")
+
+# ⬇️ Download the ZIP file to your local system
+from google.colab import files
+files.download(zip_filename)
