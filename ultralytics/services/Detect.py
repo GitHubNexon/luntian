@@ -10,16 +10,9 @@ from models.yolo_V8_model import YoloV8Model  # Adjust import path if necessary
 from datetime import datetime
 from flask import Response, stream_with_context
 
-# Define the base directory relative to the current script
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Move one level up to access the `runs` folder outside the `app` folder
 root_dir = os.path.abspath(os.path.join(base_dir, "..", ".."))
-
-# Load the trained model from the correct path
-#model_path = os.path.join(
-    #root_dir, "runs", "CropV1Trained", "cropV1", "weights", "best.pt"
-#)
 
 model_path = os.path.join(
     root_dir, "runs", "detect", "train", "weights", "best.pt"
