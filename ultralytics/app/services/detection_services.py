@@ -17,8 +17,12 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.abspath(os.path.join(base_dir, "..", ".."))
 
 # Load the trained model from the correct path
+#model_path = os.path.join(
+    #root_dir, "runs", "CropV1Trained", "cropV1", "weights", "best.pt"
+#)
+
 model_path = os.path.join(
-    root_dir, "runs", "CropV1Trained", "cropV1", "weights", "best.pt"
+    root_dir, "runs", "detect", "train", "weights", "best.pt"
 )
 model = YOLO(model_path)
 
