@@ -157,7 +157,7 @@ SOFTWARE.
 ## 🎯 Future Enhancements
 - **Enhance AI Model Accuracy** - Improve dataset quality and fine-tune YOLOv8 for better detection. 🔍
 - **User-Friendly Dashboard** - Develop a web-based dashboard for visualization and interaction. 📊
-- **Web Based System Integration** - Extend the system for real-time disease detection. 📱
+- **Mobile App Integration** - Extend the system to a mobile app for real-time disease detection. 📱
 - **Cloud Deployment** - Implement cloud-based inference for scalability. ☁️
 
 ---
